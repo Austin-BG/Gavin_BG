@@ -29,57 +29,38 @@ README ~gavin/readme-gavin-%LANGUAGE%.html~ ~gavin/readme-gavin.html~
 
 ALWAYS
 
-/* check for a ready SoD */
+  /* check for a ready SoD */
 
-ACTION_IF ((FILE_EXISTS ~dlc/sod-dlc.zip~) OR (FILE_EXISTS ~sod-dlc.zip~)) THEN BEGIN
-  FAIL @4
-END
+  ACTION_IF ((FILE_EXISTS ~dlc/sod-dlc.zip~) OR (FILE_EXISTS ~sod-dlc.zip~)) THEN BEGIN
+    FAIL @4
+  END
+  
+  ACTION_IF !VARIABLE_IS_SET cd_gavin_bg_always THEN BEGIN // check to make this happen only once per install 
+      
+    OUTER_SET cd_gavin_bg_always = 1
 
+    /* These actions are processed for every component: reading of variables */
 
-
-/* These actions are processed for every component: reading of variables */
-
-  ACTION_IF GAME_IS ~tutu tutu_totsc~ THEN BEGIN
-    /* Tell the player it is using Tutu stuff */
-    PRINT @0
-    INCLUDE ~gavin\lib\g3_tutu_cpmvars.tpa~
-    OUTER_SPRINT ~eet_var~ ~~
-  END 
-  ACTION_IF GAME_IS ~bgt~ THEN BEGIN
+    ACTION_IF GAME_IS ~tutu tutu_totsc~ THEN BEGIN
+      /* Tell the player it is using Tutu stuff */
+      PRINT @0
+      INCLUDE ~gavin\lib\g3_tutu_cpmvars.tpa~
+    END ELSE
+    ACTION_IF GAME_IS ~bgt~ THEN BEGIN
       /* Tell the player it is using BGT stuff */
       PRINT @1
       INCLUDE ~gavin\lib\g3_bgt_cpmvars.tpa~
-    OUTER_SPRINT ~eet_var~ ~~
-   END 
-   ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+     END ELSE 
+     ACTION_IF GAME_IS ~bgee~ THEN BEGIN
       /* Tell the player it is using BG:EE stuff */
       PRINT @2000
       INCLUDE ~gavin\lib\g3_bgee_cpmvars.tpa~
-    OUTER_SPRINT ~eet_var~ ~~
-   END 
-
- /* EET version! ---------------------- */
-
-  ACTION_IF GAME_IS ~eet~ THEN BEGIN
-
-    /* Tell the player it is using eet */
-    PRINT @104 
+     END ELSE BEGIN 
+      /* Tell the player it is using eet */
+      PRINT @104 
       INCLUDE ~EET/other/cpmvars/eet_cpmvars.tpa~
       INCLUDE ~EET/other/EET_functions.tph~
-  END
-
-
-  /* prep tras for sound references 
-  COPY ~gavin/tra/%LANGUAGE%/gavin_tmp.tra~ ~gavin/tra/%LANGUAGE%/gavin.tra~
-       EVALUATE_BUFFER
-  LOAD_TRA ~gavin/tra/%LANGUAGE%/gavin.tra~
-*/
-
-
-///////////////////////////////////////////
-/* all following actions are only processed ONCE for the whole mod, independent of un- and reinstalling of single components */
-
-ACTION_IF !FILE_EXISTS ~GAVIN/backup/gavinreinstall.mrk~ BEGIN
+    END
 
 
 /* Handling of correctly formatted tra-files!! ---------------------- */
@@ -87,41 +68,22 @@ ACTION_IF !FILE_EXISTS ~GAVIN/backup/gavinreinstall.mrk~ BEGIN
   /*
    * Copies tra files into the autotra-folder (to leave the originals untouched)
    */
-  DEFINE_ACTION_FUNCTION autotra_workaround BEGIN
     COPY ~gavin/tra/english~  ~gavin/tra/autotra/%LANGUAGE%~ EVALUATE_BUFFER
     COPY ~gavin/tra/%LANGUAGE%~  ~gavin/tra/autotra/%LANGUAGE%~ EVALUATE_BUFFER
-  END
-
-  LAF autotra_workaround END
 
 
-//ACTION_DEFINE_ARRAY fl#noconvert BEGIN setup END
+    ACTION_DEFINE_ARRAY fl#reload BEGIN gavin END
 
-ACTION_DEFINE_ARRAY fl#reload BEGIN gavin END
-
-  LAF HANDLE_CHARSETS
-    INT_VAR
-      infer_charset = 1
-    STR_VAR
-      tra_path = EVAL ~gavin/Tra/autotra~
-      noconvert_array = fl#noconvert
-      reload_array = fl#reload
-  END
-
-COPY ~GAVIN/B!component.xx~ ~GAVIN/backup/gavinreinstall.mrk~
-
-END //gavinreinstall.mrk
-
-
-
-/* This again happens for every running of the installer */
-
-   /* TRAs declared in LANGUAGE must be reloaded - by hand, because of the copying (for non-EE version */
-
-  LOAD_TRA ~gavin/tra/autotra/%LANGUAGE%/gavin.tra~
-
-
-
+    LAF HANDLE_CHARSETS
+      INT_VAR
+        infer_charset = 1
+      STR_VAR
+        tra_path = EVAL ~gavin/Tra/autotra~
+        noconvert_array = fl#noconvert
+        reload_array = fl#reload
+    END
+    
+  END // always var check  
 
 END //ALWAYS
 
@@ -129,14 +91,20 @@ END //ALWAYS
 /* Language Settings */
 AUTO_TRA ~gavin/tra/autotra/%s~
 
-LANGUAGE ~English~ ~english~ ~gavin/tra/english/setup.tra~
-LANGUAGE ~French~ ~french~ ~gavin/tra/french/setup.tra~
-LANGUAGE ~Deutsch (Teildeutsche Version, der Rest ist auf Englisch)~ ~german~ ~gavin/tra/german/setup.tra~
-// LANGUAGE ~Polish~ ~polish~ ~gavin/tra/polish/setup.tra~
- LANGUAGE ~Russian~ ~russian (by Austin & Arcanecoast Team)~ ~gavin/tra/russian/setup.tra~
-// LANGUAGE ~Spanish~ ~spanish~ ~gavin/tra/spanish/setup.tra~
-// LANGUAGE ~Latin~ ~latin~ ~gavin/tra/latin/setup.tra~
-// LANGUAGE ~Klingon~ ~klingon~ ~gavin/tra/klingon/setup.tra~
+LANGUAGE ~English~ ~english~ ~gavin/tra/english/gavin.tra~
+                             ~gavin/tra/english/setup.tra~
+LANGUAGE ~French~  ~french~  ~gavin/tra/english/gavin.tra~
+                             ~gavin/tra/english/setup.tra~
+                             ~gavin/tra/french/gavin.tra~
+                             ~gavin/tra/french/setup.tra~
+LANGUAGE ~Deutsch (Teildeutsche Version, der Rest ist auf Englisch)~ ~german~ ~gavin/tra/english/gavin.tra~
+                                                                              ~gavin/tra/english/setup.tra~
+                                                                              ~gavin/tra/german/gavin.tra~
+                                                                              ~gavin/tra/german/setup.tra~
+ LANGUAGE ~Russian~ ~russian (by Austin & Arcanecoast Team)~ ~gavin/tra/english/gavin.tra~
+                                                             ~gavin/tra/english/setup.tra~
+                                                             ~gavin/tra/russian/gavin.tra~
+                                                             ~gavin/tra/russian/setup.tra~
 
 /////////////////////////////////////////////
 // Install GAVIN NPC                       //
