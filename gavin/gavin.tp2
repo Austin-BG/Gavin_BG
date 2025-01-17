@@ -113,8 +113,6 @@ BEGIN @3
  /* Tell the player it is not Tutu, BGT, or BG:EE */
 REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgt bgee eet~) @2
 
-COPY ~GAVIN/B!component.xx~ ~override/GavinNPC.B~
-
 //BG:EE - ADD_JOURNAL
 ADD_JOURNAL TITLE (@3000) @3001 @3002 @3003 @3004 USING ~gavin/tra/autotra/%LANGUAGE%/gavin.tra~
 
@@ -1164,7 +1162,6 @@ BEGIN @99
   GROUP @100
 
 REQUIRE_COMPONENT ~Gavin.tp2~ 0 @101
-REQUIRE_FILE ~override/GavinNPC.B~ @101
 
   /* Gavin's romance timer */
 PRINT @102
@@ -1429,7 +1426,7 @@ BEGIN @127
 /*
 BEGIN @129
   SUBCOMPONENT @130
-  REQUIRE_FILE ~override/GavinNPC.B~ @131
+  REQUIRE_COMPONENT ~Gavin.tp2~ 0 @131
    ACTION_IF GAME_IS ~bgt tutu tutu_totsc~ THEN BEGIN
     COPY ~GAVIN/portraits/B!GAVINL.bmp~ ~override/bgavinL.bmp~
     COPY ~GAVIN/portraits/B!GAVINS.bmp~ ~override/bgavinS.bmp~
@@ -1441,7 +1438,7 @@ BEGIN @129
 */
 BEGIN @136
   SUBCOMPONENT @130
-  REQUIRE_FILE ~override/GavinNPC.B~ @131
+  REQUIRE_COMPONENT ~Gavin.tp2~ 0 @131
    ACTION_IF GAME_IS ~bgt tutu tutu_totsc~ THEN BEGIN
     COPY ~GAVIN/portraits/AMGAVM.bmp~ ~override/bgavinL.bmp~
     COPY ~GAVIN/portraits/AMGAVS.bmp~ ~override/bgavinS.bmp~
@@ -1452,7 +1449,7 @@ BEGIN @136
    END
 BEGIN @137
   SUBCOMPONENT @130
-  REQUIRE_FILE ~override/GavinNPC.B~ @131
+  REQUIRE_COMPONENT ~Gavin.tp2~ 0 @131
    ACTION_IF GAME_IS ~bgt tutu tutu_totsc~ THEN BEGIN
     COPY ~GAVIN/portraits/b!gavin4l.bmp~ ~override/bgavinL.bmp~
     COPY ~GAVIN/portraits/b!gavin4s.bmp~ ~override/bgavinS.bmp~
@@ -1463,7 +1460,7 @@ BEGIN @137
    END
 BEGIN @138
   SUBCOMPONENT @130
-  REQUIRE_FILE ~override/GavinNPC.B~ @131
+  REQUIRE_COMPONENT ~Gavin.tp2~ 0 @131
    ACTION_IF GAME_IS ~bgt tutu tutu_totsc~ THEN BEGIN
     COPY ~GAVIN/portraits/b!gavin5l.bmp~ ~override/bgavinL.bmp~
     COPY ~GAVIN/portraits/b!gavin5s.bmp~ ~override/bgavinS.bmp~
@@ -1474,7 +1471,7 @@ BEGIN @138
    END
 BEGIN @132
   SUBCOMPONENT @130
-  REQUIRE_FILE ~override/GavinNPC.B~ @131
+  REQUIRE_COMPONENT ~Gavin.tp2~ 0 @131
    ACTION_IF GAME_IS ~bgt tutu tutu_totsc~ THEN BEGIN
     COPY ~GAVIN/portraits/B!Gavin1L.bmp~ ~override/bgavinL.bmp~
     COPY ~GAVIN/portraits/B!Gavin1S.bmp~ ~override/bgavinS.bmp~
@@ -1485,7 +1482,7 @@ BEGIN @132
    END
 BEGIN @133
   SUBCOMPONENT @130
-    REQUIRE_FILE ~override/GavinNPC.B~ @131
+  REQUIRE_COMPONENT ~Gavin.tp2~ 0 @131
    ACTION_IF GAME_IS ~bgt tutu tutu_totsc~ THEN BEGIN
     COPY ~GAVIN/portraits/B!Gavin2L.bmp~ ~override/bgavinL.bmp~
     COPY ~GAVIN/portraits/B!Gavin2S.bmp~ ~override/bgavinS.bmp~
@@ -1496,7 +1493,7 @@ BEGIN @133
    END
 BEGIN @2003 
   SUBCOMPONENT @130
-    REQUIRE_FILE ~override/GavinNPC.B~ @131
+  REQUIRE_COMPONENT ~Gavin.tp2~ 0 @131
    ACTION_IF GAME_IS ~bgt tutu tutu_totsc~ THEN BEGIN
     COPY ~GAVIN/portraits/b_gav1M.bmp~ ~override/bgavinL.bmp~
     COPY ~GAVIN/portraits/b_gav1S.bmp~ ~override/bgavinS.bmp~
@@ -1515,7 +1512,7 @@ BEGIN @2003
 /* Always keep last in the tp2 */
 
 BEGIN @134
-  REQUIRE_FILE ~override/GavinNPC.B~ @135
+  REQUIRE_COMPONENT ~Gavin.tp2~ 0 @135
     COMPILE EVALUATE_BUFFER ~GAVIN/PID/PIDnight.d~
     COMPILE EVALUATE_BUFFER ~GAVIN/PID/B!GavinPID.d~
     EXTEND_BOTTOM ~B!GAVIND.bcs~ ~GAVIN/PID/PIDinitD.baf~
