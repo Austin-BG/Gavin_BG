@@ -140,8 +140,13 @@ END
 
 
 
+/* STATE.IDS patching - borrowed from BG1 NPC Project and CamDawg */
+/* adds custom IsValidForPartyDialogue state */
+APPEND ~STATE.IDS~ ~0x80101FEF CD_STATE_NOTVALID~
+             UNLESS ~CD_STATE_NOTVALID~
+
 /* Ensures that Gavin won't leave the party because of reputation */
-PATCH_IF !GAME_IS ~bgee eet~ BEGIN // do this via op360 on EEs
+ACTION_IF !GAME_IS ~bgee eet~ BEGIN // do this via op360 on EEs
 
   COPY_EXISTING ~dplayer2.bcs~ ~override~
     DECOMPILE_AND_PATCH BEGIN
@@ -149,87 +154,73 @@ PATCH_IF !GAME_IS ~bgee eet~ BEGIN // do this via op360 on EEs
     !CharName("Gavin",Myself)~
     END
   BUT_ONLY
-
-END
-
-/* STATE.IDS patching - borrowed from BG1 NPC Project and CamDawg */
-/* adds custom IsValidForPartyDialogue state */
-APPEND ~STATE.IDS~ ~0x80101FEF CD_STATE_NOTVALID~
-             UNLESS ~CD_STATE_NOTVALID~
-
-
-/* SCS related code taken out for v9 (outdated)
-
-*/
-
-ACTION_IF GAME_IS ~bgt tutu tutu_totsc~ THEN BEGIN 
+  
   /* KIT.IDS, ACTION.IDS and TRIGGER.IDS patching - borrowed in bits and pieces from BG1 NPC Project, BG2 Fixpack, and Wisp - much thanks to all */
-  INCLUDE ~gavin/lib/b!ids.tph~
+  INCLUDE ~gavin/lib/tob2soa.tph~
+  INCLUDE ~gavin/lib/kit_ids_fixer.tpa~
   INCLUDE ~gavin/lib/b!gtimes.tph~
-END
 
-/* Tutu Area Script Assignment Patching: All Areas Script ID'd */
-ACTION_IF FILE_EXISTS_IN_GAME ~FW0100.are~ THEN BEGIN
-  INCLUDE ~gavin/lib/tutu_area_script_assign.tph~
-END
+  /* Tutu Area Script Assignment Patching: All Areas Script ID'd */
+  ACTION_IF FILE_EXISTS_IN_GAME ~FW0100.are~ THEN BEGIN
+    INCLUDE ~gavin/lib/tutu_area_script_assign.tph~
+  END
 
-/* Area Type Flagging - not necessary for BG:EE */
-/* ToSC only: Tutu and BGT */
-ACTION_IF (FILE_EXISTS_IN_GAME ~FW1500.are~) OR (FILE_EXISTS_IN_GAME ~ARW500.are~) THEN BEGIN // if TotSC is installed
-  COPY_EXISTING ~%IsleofBalduranN%.are~ ~override~
-                ~%IsleofBalduranS%.are~ ~override~
-                ~%DurlagsTower%.are~ ~override~
-                ~%Farmlands%.are~ ~override~
+  /* Area Type Flagging - not necessary for BG:EE */
+  /* ToSC only: Tutu and BGT */
+  ACTION_IF (FILE_EXISTS_IN_GAME ~FW1500.are~) OR (FILE_EXISTS_IN_GAME ~ARW500.are~) THEN BEGIN // if TotSC is installed
+    COPY_EXISTING ~%IsleofBalduranN%.are~ ~override~
+                  ~%IsleofBalduranS%.are~ ~override~
+                  ~%DurlagsTower%.are~ ~override~
+                  ~%Farmlands%.are~ ~override~
+      READ_BYTE  "0x48" "flags"
+      WRITE_BYTE "0x48" ("%flags%" BOR "0b00010001")
+    BUT_ONLY_IF_IT_CHANGES
+  END
+
+  /* FOREST and OUTDOOR: Tutu and BGT */
+  COPY_EXISTING ~%FishingVillage%.are~ ~override~
+                ~%Peldvale%.are~ ~override~
+                ~%LionsWay%.are~ ~override~
+                ~%CoastWay%.are~ ~override~
+                ~%Larswood%.are~ ~override~
+                ~%ShipwrecksCoast%.are~ ~override~
+                ~%HighHedge%.are~ ~override~
+                ~%MutaminsGarden%.are~ ~override~
+                ~%Lighthouse%.are~ ~override~
+                ~%RedCanyons%.are~ ~override~
+                ~%SouthBeregostRoad%.are~ ~override~
+                ~%Ulcaster%.are~ ~override~
+                ~%ArchaeologicalSite%.are~ ~override~
+                ~%FishermansLake%.are~ ~override~
+                ~%NorthNashkelRoad%.are~ ~override~
+                ~%LonelyPeaks%.are~ ~override~
+                ~%FirewineBridge%.are~ ~override~
+                ~%BearRiver%.are~ ~override~
+                ~%ValleyoftheTombs%.are~ ~override~
+                ~%DryadFalls%.are~ ~override~
+                ~%FireLeafForest%.are~ ~override~
+                ~%GibberlingMountains%.are~ ~override~
     READ_BYTE  "0x48" "flags"
     WRITE_BYTE "0x48" ("%flags%" BOR "0b00010001")
-  BUT_ONLY_IF_IT_CHANGES
-END
+    BUT_ONLY_IF_IT_CHANGES
 
-ACTION_IF GAME_IS ~tutu tutu_totsc bgt~ THEN BEGIN
-  /* FOREST and OUTDOOR: Tutu and BGT */
-COPY_EXISTING ~%FishingVillage%.are~ ~override~
-              ~%Peldvale%.are~ ~override~
-              ~%LionsWay%.are~ ~override~
-              ~%CoastWay%.are~ ~override~
-              ~%Larswood%.are~ ~override~
-              ~%ShipwrecksCoast%.are~ ~override~
-              ~%HighHedge%.are~ ~override~
-              ~%MutaminsGarden%.are~ ~override~
-              ~%Lighthouse%.are~ ~override~
-              ~%RedCanyons%.are~ ~override~
-              ~%SouthBeregostRoad%.are~ ~override~
-              ~%Ulcaster%.are~ ~override~
-              ~%ArchaeologicalSite%.are~ ~override~
-              ~%FishermansLake%.are~ ~override~
-              ~%NorthNashkelRoad%.are~ ~override~
-              ~%LonelyPeaks%.are~ ~override~
-              ~%FirewineBridge%.are~ ~override~
-              ~%BearRiver%.are~ ~override~
-              ~%ValleyoftheTombs%.are~ ~override~
-              ~%DryadFalls%.are~ ~override~
-              ~%FireLeafForest%.are~ ~override~
-              ~%GibberlingMountains%.are~ ~override~
-  READ_BYTE  "0x48" "flags"
-  WRITE_BYTE "0x48" ("%flags%" BOR "0b00010001")
-  BUT_ONLY_IF_IT_CHANGES
+  /* OUTDOOR ONLY: Tutu and BGT */
+  COPY_EXISTING ~%GnollStronghold%.are~ ~override~
+                ~%NashkelMines%.are~ ~override~
+                ~%FriendlyArmInn%.are~ ~override~
+                ~%Temple%.are~ ~override~
+                ~%NashkelCarnival%.are~ ~override~
+    READ_BYTE  "0x48" "flags"
+    WRITE_BYTE "0x48" ("%flags%" BOR "0b00000001")
+    BUT_ONLY_IF_IT_CHANGES
 
-/* OUTDOOR ONLY: Tutu and BGT */
-COPY_EXISTING ~%GnollStronghold%.are~ ~override~
-              ~%NashkelMines%.are~ ~override~
-              ~%FriendlyArmInn%.are~ ~override~
-              ~%Temple%.are~ ~override~
-              ~%NashkelCarnival%.are~ ~override~
-  READ_BYTE  "0x48" "flags"
-  WRITE_BYTE "0x48" ("%flags%" BOR "0b00000001")
-  BUT_ONLY_IF_IT_CHANGES
-
-/* CITY and OUTDOOR */
-COPY_EXISTING ~%WyrmsCrossing%.are~ ~override~
-              ~%Candlekeep_Ch6%.are~ ~override~
-              ~%Gullykin%.are~ ~override~
-  READ_BYTE  "0x48" "flags"
-  WRITE_BYTE "0x48" ("%flags%" BOR "0b00001001")
-  BUT_ONLY_IF_IT_CHANGES
+  /* CITY and OUTDOOR */
+  COPY_EXISTING ~%WyrmsCrossing%.are~ ~override~
+                ~%Candlekeep_Ch6%.are~ ~override~
+                ~%Gullykin%.are~ ~override~
+    READ_BYTE  "0x48" "flags"
+    WRITE_BYTE "0x48" ("%flags%" BOR "0b00001001")
+    BUT_ONLY_IF_IT_CHANGES
 
 END
   
