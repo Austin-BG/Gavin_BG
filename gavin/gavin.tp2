@@ -644,40 +644,41 @@ COPY ~Gavin/CRE/B!GAVIN.CRE~ ~override~
 /* BGT, Tutu, BG:EE */
 
 ACTION_IF GAME_IS ~bgt tutu tutu_totsc bgee~ THEN BEGIN
-APPEND ~pdialog.2da~
-~B!GAVIN   B!GAVINP   B!GAVINJ   B!GAVIND~
-UNLESS ~B!GAVIN~
 
-APPEND ~interdia.2da~
-~B!GAVIN   BB!GAVIN~
-UNLESS ~B!GAVIN~
+  APPEND ~pdialog.2da~
+  ~B!GAVIN   B!GAVINP   B!GAVINJ   B!GAVIND~
+  UNLESS ~B!GAVIN~
 
-END
+  APPEND ~interdia.2da~
+  ~B!GAVIN   BB!GAVIN~
+  UNLESS ~B!GAVIN~
 
-/* BG1:EET */
+END ELSE BEGIN /* BG1:EET */
 
-ACTION_IF GAME_IS ~eet~ THEN BEGIN
-APPEND ~bgdialog.2da~
-~B!GAVIN   B!GAVINP   B!GAVINJ   B!GAVIND~
-UNLESS ~B!GAVIN~
+  ACTION_IF GAME_IS ~eet~ THEN BEGIN
+  APPEND ~bgdialog.2da~
+  ~B!GAVIN   B!GAVINP   B!GAVINJ   B!GAVIND~
+  UNLESS ~B!GAVIN~
 
-APPEND ~bgbanter.2da~
-~B!GAVIN   BB!GAVIN~
-UNLESS ~B!GAVIN~
+  APPEND ~bgbanter.2da~
+  ~B!GAVIN   BB!GAVIN~
+  UNLESS ~B!GAVIN~
 
-/* SOD */
-APPEND ~bdbanter.2da~
-~B!GAVIN   BB!GAVIN~
-UNLESS ~B!GAVIN~
+  /* SOD */
+  APPEND ~bdbanter.2da~
+  ~B!GAVIN   BB!GAVIN~
+  UNLESS ~B!GAVIN~
+  
 END
 
 
 /* SoD */
 
 ACTION_IF (GAME_IS ~bgee eet~ AND FILE_EXISTS_IN_GAME ~bd0103.are~) THEN BEGIN
-APPEND ~bddialog.2da~
-~B!GAVIN   B!GAVINP   B!GAVINJ   B!GAVIND~
-UNLESS ~B!GAVIN~
+
+  APPEND ~bddialog.2da~
+  ~B!GAVIN   B!GAVINP   B!GAVINJ   B!GAVIND~
+  UNLESS ~B!GAVIN~
 
 END
 
@@ -704,10 +705,10 @@ COPY_EXISTING ~%tutu_scriptbg%FTOWN2%eet_var%.cre~ ~override~
 /* now Gavin has to give her the ring (he does it himself, good lad!) */
 
 COPY_EXISTING ~B!GavinJ.dlg~ ~override~
-DECOMPILE_AND_PATCH BEGIN
-REPLACE_TEXTUALLY ~\(TakePartyItem("[_]RINGJOS")\)~ ~\1 GiveItem("%tutu_var%RINGJOS","%tutu_scriptbg%FTOWN2%eet_var%")~
-END
-BUT_ONLY_IF_IT_CHANGES
+  DECOMPILE_AND_PATCH BEGIN
+  REPLACE_TEXTUALLY ~\(TakePartyItem("[_]RINGJOS")\)~ ~\1 GiveItem("%tutu_var%RINGJOS","%tutu_scriptbg%FTOWN2%eet_var%")~
+  END
+  BUT_ONLY_IF_IT_CHANGES
 
 /* for EE. need a different check, because this file doesn't get carried over? */
 ACTION_IF (FILE_EXISTS_IN_GAME ~override/X#BG1NPCPhase1.G3~ OR FILE_EXISTS_IN_GAME ~override/X#KABAND.DLG~)THEN BEGIN // if BG1 NPC is installed
@@ -738,41 +739,41 @@ COPY_EXISTING ~%tutu_var%prism.cre~ ~override/B!JOLUN.cre~
   WRITE_ASCII 0x2cc ~B!JOLUN~ #8 // dialogue
   WRITE_ASCII 0X34 ~bjoluns~ #8 //small portrait
   WRITE_ASCII 0x280 ~B!JOLUN~ #32 //DV
-SAY INITIAL_MEETING @51
-SAY DAMAGE @52
-SAY DYING @53
-SAY SELECT_COMMON1 @51
-SAY DIALOGUE_DEFAULT @51
+  SAY INITIAL_MEETING @51
+  SAY DAMAGE @52
+  SAY DYING @53
+  SAY SELECT_COMMON1 @51
+  SAY DIALOGUE_DEFAULT @51
 
 /* adding Darlos and Evie */
 ACTION_IF GAME_IS ~tutu_totsc bgt bgee eet~ THEN BEGIN// if TotSC is installed
   COPY ~GAVIN/CRE/B!DARLOS.CRE~ ~override~
-  SAY NAME1 @54
-  SAY NAME2 @54
-  WRITE_ASCII 0x248 ~B!DARLOS~ #8 // override
-  WRITE_ASCII 0x2cc ~B!DARLOS~ #8 // dialogue
-  WRITE_ASCII 0X34 ~bdarlos~ #8 //small portrait
-  WRITE_ASCII 0x280 ~B!DARLOS~ #32 //DV
-  SAY INITIAL_MEETING @55
-  SAY DAMAGE @56
-  SAY DYING @57
-  SAY SELECT_COMMON1 @55
-  SAY DIALOGUE_HOSTILE @58
-  SAY DIALOGUE_DEFAULT @55
+    SAY NAME1 @54
+    SAY NAME2 @54
+    WRITE_ASCIIE 0x250 ~%tutu_var%shout~
+    WRITE_ASCIIE 0x258 ~%tutu_var%mtowbez~
+    WRITE_ASCIIE 0x260 ~%tutu_scriptr%unenemy~
+    WRITE_ASCIIE 0x268 ~%tutu_scriptw%drungst~
+    SAY INITIAL_MEETING @55
+    SAY DAMAGE @56
+    SAY DYING @57
+    SAY SELECT_COMMON1 @55
+    SAY DIALOGUE_HOSTILE @58
+    SAY DIALOGUE_DEFAULT @55
 
   COPY ~GAVIN/CRE/B!EVIE.CRE~ ~override~
-  SAY NAME1 @59
-  SAY NAME2 @59
-  WRITE_ASCII 0x248 ~B!EVIE~ #8 // override
-  WRITE_ASCII 0x2cc ~B!EVIE~ #8 // dialogue
-  WRITE_ASCII 0X34 ~bevie~ #8 //small portrait
-  WRITE_ASCII 0x280 ~B!EVIE~ #32 //DV
-  SAY INITIAL_MEETING @60
-  SAY DAMAGE @61
-  SAY DYING @62
-  SAY SELECT_COMMON1 @60
-  SAY DIALOGUE_HOSTILE @63
-  SAY DIALOGUE_DEFAULT @60
+    SAY NAME1 @59
+    SAY NAME2 @59
+    WRITE_ASCIIE 0x250 ~%tutu_var%shout~
+    WRITE_ASCIIE 0x258 ~%tutu_var%ftownaz~
+    WRITE_ASCIIE 0x260 ~%tutu_scriptr%unenemy~
+    WRITE_ASCIIE 0x268 ~%tutu_scriptw%drungst~
+    SAY INITIAL_MEETING @60
+    SAY DAMAGE @61
+    SAY DYING @62
+    SAY SELECT_COMMON1 @60
+    SAY DIALOGUE_HOSTILE @63
+    SAY DIALOGUE_DEFAULT @60
 END
 
 /* interjection script compilation */
