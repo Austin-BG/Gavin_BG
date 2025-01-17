@@ -1,0 +1,140 @@
+
+/* Compile dialog */
+
+  COMPILE EVALUATE_BUFFER ~GAVIN/Romance/RomanceDLG/B!GavinLovetalks.d~
+  COMPILE EVALUATE_BUFFER ~GAVIN/Romance/RomanceDLG/GavinNPCRomBanters.d~
+  COMPILE EVALUATE_BUFFER ~GAVIN/Romance/RomanceDLG/AjantisPCReGavin.d~
+  COMPILE EVALUATE_BUFFER ~GAVIN/Romance/B!REED/B!REED.d~
+
+/* Extend script */
+  COMPILE EVALUATE_BUFFER ~GAVIN/Romance/B!REED/B!REED.baf~
+
+  EXTEND_TOP ~B!GAVIN.bcs~  ~GAVIN/Romance/RomanceBAF/B!GavinRomance.baf~
+    EVALUATE_BUFFER
+  EXTEND_BOTTOM ~B!GAVIN.bcs~  ~GAVIN/Romance/RomanceBAF/B!GAVINRomBreaks.baf~
+    EVALUATE_BUFFER
+  EXTEND_BOTTOM ~B!GAVIN.bcs~  ~GAVIN/Romance/RomanceBAF/B!GAVINRomNPC.baf~
+    EVALUATE_BUFFER
+  EXTEND_BOTTOM ~%AJANTIS_BCS%.bcs~     ~GAVIN/Romance/RomanceBAF/AjantisPCRegardingGavin.baf~
+    EVALUATE_BUFFER
+  EXTEND_BOTTOM ~%CORAN_BCS%.bcs~     ~GAVIN/Romance/RomanceBAF/GavinCoranRomComments.baf~
+    EVALUATE_BUFFER
+  EXTEND_BOTTOM ~%XAN_BCS%.bcs~     ~GAVIN/Romance/RomanceBAF/GavinXanRomComments.baf~
+    EVALUATE_BUFFER
+  EXTEND_BOTTOM ~%ALORA_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Alora.baf~
+    EVALUATE_BUFFER
+  EXTEND_BOTTOM ~%BRANWEN_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Branwen.baf~
+    EVALUATE_BUFFER
+  EXTEND_BOTTOM ~%DYNAHEIR_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Dynaheir.baf~
+    EVALUATE_BUFFER
+  EXTEND_BOTTOM ~%EDWIN_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Edwin.baf~
+    EVALUATE_BUFFER
+  EXTEND_BOTTOM ~%ELDOTH_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Eldoth.baf~
+    EVALUATE_BUFFER
+  EXTEND_BOTTOM ~%FALDORN_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Faldorn.baf~
+    EVALUATE_BUFFER
+  EXTEND_BOTTOM ~%GARRICK_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Garrick.baf~
+    EVALUATE_BUFFER
+  EXTEND_BOTTOM ~%IMOEN_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Imoen.baf~
+    EVALUATE_BUFFER
+  EXTEND_BOTTOM ~%JAHEIRA_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Jaheira.baf~
+    EVALUATE_BUFFER
+  EXTEND_BOTTOM ~%KAGAIN_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Kagain.baf~
+    EVALUATE_BUFFER
+  EXTEND_BOTTOM ~%KHALID_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Khalid.baf~
+    EVALUATE_BUFFER
+  EXTEND_BOTTOM ~%KIVAN_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Kivan.baf~
+    EVALUATE_BUFFER
+  EXTEND_BOTTOM ~%MINSC_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Minsc.baf~
+    EVALUATE_BUFFER
+  EXTEND_BOTTOM ~%MONTARON_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Montaron.baf~
+    EVALUATE_BUFFER
+  EXTEND_BOTTOM ~%QUAYLE_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Quayle.baf~
+    EVALUATE_BUFFER
+  EXTEND_BOTTOM ~%SAFANA_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Safana.baf~
+    EVALUATE_BUFFER
+  EXTEND_BOTTOM ~%SHARTEEL_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!SharTeel.baf~
+    EVALUATE_BUFFER
+  EXTEND_BOTTOM ~%SKIE_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Skie.baf~
+    EVALUATE_BUFFER
+  EXTEND_BOTTOM ~%TIAX_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Tiax.baf~
+    EVALUATE_BUFFER
+  EXTEND_BOTTOM ~%VICONIA_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Viconia.baf~
+    EVALUATE_BUFFER
+  EXTEND_BOTTOM ~%XZAR_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Xzar.baf~
+    EVALUATE_BUFFER
+  EXTEND_BOTTOM ~%YESLICK_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Yeslick.baf~
+    EVALUATE_BUFFER
+
+/* Engagement Ring */
+COPY ~GAVIN/bams/b!ringpi.bam~ ~override~
+COPY ~GAVIN/Items/b!pcrin1.EFF~ ~override~
+COPY ~GAVIN/Items/b!pcrin2.EFF~ ~override~
+COPY ~GAVIN/Items/b!pcrin3.EFF~ ~override~
+COPY ~GAVIN/Items/b!pcrin4.EFF~ ~override~
+COPY ~GAVIN/Items/b!pcrin5.EFF~ ~override~
+COPY ~GAVIN/Items/b!pcrin6.EFF~ ~override~
+COPY ~GAVIN/Items/b!pcrin7.EFF~ ~override~
+COPY ~GAVIN/Items/b!pcring.ITM~ ~override~
+  SAY NAME1 @111
+  SAY NAME2 @111
+  SAY UNIDENTIFIED_DESC @112
+  SAY DESC @113
+
+COPY ~GAVIN/bams/b!handi.bam~ ~override~
+COPY ~GAVIN/bams/b!handd.bam~ ~override~
+
+COPY ~GAVIN/Items/B!HAND.itm~ ~override~
+  SAY NAME1 @114
+  SAY NAME2 @114
+  SAY UNIDENTIFIED_DESC @115
+  SAY DESC @115
+
+COPY ~GAVIN/bams/b!fingd.bam~ ~override~
+
+COPY ~GAVIN/bams/b!fingg.bam~ ~override~
+COPY ~GAVIN/bams/b!fingi.bam~ ~override~
+COPY ~GAVIN/Items/B!FINGER.itm~ ~override~
+  SAY NAME1 @116
+  SAY NAME2 @116
+  SAY UNIDENTIFIED_DESC @117
+  SAY DESC @117
+
+COPY ~GAVIN/Items/B!GRING2.itm~ ~override~
+  SAY NAME1 @64
+  SAY NAME2 @64
+  SAY UNIDENTIFIED_DESC @118
+  SAY DESC @118
+
+COPY ~GAVIN/Romance/B!REED/B!REED.CRE~ ~override~
+  ADD_CRE_ITEM ~%tutu_var%clck15~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+  ADD_CRE_ITEM ~%tutu_var%ring06~ #0 #0 #0 ~IDENTIFIED~ ~LRING~
+  ADD_CRE_ITEM ~%tutu_var%ring02~ #0 #0 #0 ~IDENTIFIED~ ~RRING~
+  ADD_CRE_ITEM ~%tutu_var%dagg05~ #50 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+  ADD_CRE_ITEM ~%tutu_var%dagg03~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON2~
+  ADD_CRE_ITEM ~%tutu_var%potn08~ #2 #0 #0 ~IDENTIFIED~ ~QITEM1~
+  ADD_CRE_ITEM ~%tutu_var%wand04~ #0 #0 #0 ~IDENTIFIED~ ~QITEM2~
+  ADD_CRE_ITEM ~%tutu_var%QITEM26~ #10 #0 #0 ~IDENTIFIED~ ~INV2~
+  SAY NAME1 @119
+  SAY NAME2 @119
+  WRITE_ASCII 0x248 ~B!REED~ #8 // override
+  WRITE_ASCII 0x2cc ~B!REED~ #8 // dialogue
+  WRITE_ASCII 0X34 ~breeds~ #8 //small portrait
+  WRITE_ASCII 0x280 ~B!REED~ #32 //DV
+  SAY INITIAL_MEETING @81
+  SAY DAMAGE @61
+  SAY DYING @62
+  SAY SELECT_COMMON1 @81
+  SAY DIALOGUE_DEFAULT @81
+
+COPY ~GAVIN/Items/b!gavbk.itm~ ~override/b!gavbk.itm~
+  SAY NAME1 @121
+  SAY NAME2 @121
+  SAY UNIDENTIFIED_DESC @122
+  SAY DESC @122
+
+COPY_EXISTING ~%tutu_var%scrltar.itm~ ~override/b!gavscl.itm~
+  SAY NAME1 @123
+  SAY NAME2 @123
+  SAY UNIDENTIFIED_DESC @124
+  SAY DESC @124

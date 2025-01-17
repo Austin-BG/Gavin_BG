@@ -111,9 +111,10 @@ LANGUAGE ~Deutsch (Teildeutsche Version, der Rest ist auf Englisch)~ ~german~ ~g
 /////////////////////////////////////////////
 // Install GAVIN NPC                       //
 /////////////////////////////////////////////
-BEGIN @3
+BEGIN @3 DESIGNATED 0
  /* Tell the player it is not Tutu, BGT, or BG:EE */
 REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgt bgee eet~) @2
+LABEL ~b!gavin_main~
 
 //BG:EE - ADD_JOURNAL
 ADD_JOURNAL TITLE (@3000) @3001 @3002 @3003 @3004 USING ~gavin/tra/autotra/%LANGUAGE%/gavin.tra~
@@ -655,7 +656,6 @@ ACTION_IF GAME_IS ~bgt tutu tutu_totsc bgee~ THEN BEGIN
 
 END ELSE BEGIN /* BG1:EET */
 
-  ACTION_IF GAME_IS ~eet~ THEN BEGIN
   APPEND ~bgdialog.2da~
   ~B!GAVIN   B!GAVINP   B!GAVINJ   B!GAVIND~
   UNLESS ~B!GAVIN~
@@ -1091,315 +1091,113 @@ ACTION_IF GAME_IS ~bgt~ THEN BEGIN
   EXTEND_TOP ~AR0602.bcs~ ~gavin/baf/AR0602_bgt.baf~ EVALUATE_BUFFER
 END
 
-
-
 /////////// ROMANCE //////////////////
 
-BEGIN @99
+BEGIN @106 DESIGNATED 1
+  SUBCOMPONENT @99
   GROUP @100
+  REQUIRE_COMPONENT ~Gavin.tp2~ 0 @101
+  LABEL ~b!gavin_romance_3600~
 
-REQUIRE_COMPONENT ~Gavin.tp2~ 0 @101
+OUTER_SET GAVIN_TIMER = 3600
+INCLUDE ~gavin/romance/romance_main.tpa~
 
-  /* Gavin's romance timer */
-PRINT @102
+BEGIN @107 DESIGNATED 11
+  SUBCOMPONENT @99
+  GROUP @100
+  REQUIRE_COMPONENT ~Gavin.tp2~ 0 @101
+  LABEL ~b!gavin_romance_2700~
 
-PRINT @103
+OUTER_SET GAVIN_TIMER = 2700
+INCLUDE ~gavin/romance/romance_main.tpa~
 
-OUTER_SPRINT ~gavintimer~ ~placeholder_value~
-OUTER_WHILE (!(IS_AN_INT ~gavintimer~) OR (~gavintimer~ > 0x5) OR (~gavintimer~ < 0x1)) BEGIN
-  PRINT @105
-  ACTION_READLN ~gavintimer~
-END
-      ACTION_IF ("gavintimer" = 1) THEN BEGIN
-      OUTER_SET GAVIN_TIMER = 3600
-      PRINT @106
-      END
-      ACTION_IF ("gavintimer" = 2) THEN BEGIN
-      OUTER_SET GAVIN_TIMER = 2700
-      PRINT @107
-      END
-      ACTION_IF ("gavintimer" = 3) THEN BEGIN
-      OUTER_SET GAVIN_TIMER = 1800
-      PRINT @108
-      END
-      ACTION_IF ("gavintimer" = 4) THEN BEGIN
-      OUTER_SET GAVIN_TIMER = 900
-      PRINT @109
-      END
-      ACTION_IF ("gavintimer" = 5) THEN BEGIN
-      OUTER_SET GAVIN_TIMER = 5400
-      PRINT @110
-      END
+BEGIN @108 DESIGNATED 12
+  SUBCOMPONENT @99
+  GROUP @100
+  REQUIRE_COMPONENT ~Gavin.tp2~ 0 @101
+  LABEL ~b!gavin_romance_1800~
 
-COPY ~GAVIN/Romance/B!romance.B~ ~override/GavinRom.B~
+OUTER_SET GAVIN_TIMER = 1800
+INCLUDE ~gavin/romance/romance_main.tpa~
 
-/* Compile dialog */
+BEGIN @109 DESIGNATED 13
+  SUBCOMPONENT @99
+  GROUP @100
+  REQUIRE_COMPONENT ~Gavin.tp2~ 0 @101
+  LABEL ~b!gavin_romance_900~
 
-  COMPILE EVALUATE_BUFFER ~GAVIN/Romance/RomanceDLG/B!GavinLovetalks.d~
-  COMPILE EVALUATE_BUFFER ~GAVIN/Romance/RomanceDLG/GavinNPCRomBanters.d~
-  COMPILE EVALUATE_BUFFER ~GAVIN/Romance/RomanceDLG/AjantisPCReGavin.d~
-  COMPILE EVALUATE_BUFFER ~GAVIN/Romance/B!REED/B!REED.d~
+OUTER_SET GAVIN_TIMER = 900
+INCLUDE ~gavin/romance/romance_main.tpa~
 
-/* Extend script */
-  COMPILE EVALUATE_BUFFER ~GAVIN/Romance/B!REED/B!REED.baf~
+BEGIN @110 DESIGNATED 14
+  SUBCOMPONENT @99
+  GROUP @100
+  REQUIRE_COMPONENT ~Gavin.tp2~ 0 @101
+  LABEL ~b!gavin_romance_5400~
 
-  EXTEND_TOP ~B!GAVIN.bcs~  ~GAVIN/Romance/RomanceBAF/B!GavinRomance.baf~
-    EVALUATE_BUFFER
-  EXTEND_BOTTOM ~B!GAVIN.bcs~  ~GAVIN/Romance/RomanceBAF/B!GAVINRomBreaks.baf~
-    EVALUATE_BUFFER
-  EXTEND_BOTTOM ~B!GAVIN.bcs~  ~GAVIN/Romance/RomanceBAF/B!GAVINRomNPC.baf~
-    EVALUATE_BUFFER
-  EXTEND_BOTTOM ~%AJANTIS_BCS%.bcs~     ~GAVIN/Romance/RomanceBAF/AjantisPCRegardingGavin.baf~
-    EVALUATE_BUFFER
-  EXTEND_BOTTOM ~%CORAN_BCS%.bcs~     ~GAVIN/Romance/RomanceBAF/GavinCoranRomComments.baf~
-    EVALUATE_BUFFER
-  EXTEND_BOTTOM ~%XAN_BCS%.bcs~     ~GAVIN/Romance/RomanceBAF/GavinXanRomComments.baf~
-    EVALUATE_BUFFER
-  EXTEND_BOTTOM ~%ALORA_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Alora.baf~
-    EVALUATE_BUFFER
-  EXTEND_BOTTOM ~%BRANWEN_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Branwen.baf~
-    EVALUATE_BUFFER
-  EXTEND_BOTTOM ~%DYNAHEIR_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Dynaheir.baf~
-    EVALUATE_BUFFER
-  EXTEND_BOTTOM ~%EDWIN_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Edwin.baf~
-    EVALUATE_BUFFER
-  EXTEND_BOTTOM ~%ELDOTH_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Eldoth.baf~
-    EVALUATE_BUFFER
-  EXTEND_BOTTOM ~%FALDORN_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Faldorn.baf~
-    EVALUATE_BUFFER
-  EXTEND_BOTTOM ~%GARRICK_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Garrick.baf~
-    EVALUATE_BUFFER
-  EXTEND_BOTTOM ~%IMOEN_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Imoen.baf~
-    EVALUATE_BUFFER
-  EXTEND_BOTTOM ~%JAHEIRA_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Jaheira.baf~
-    EVALUATE_BUFFER
-  EXTEND_BOTTOM ~%KAGAIN_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Kagain.baf~
-    EVALUATE_BUFFER
-  EXTEND_BOTTOM ~%KHALID_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Khalid.baf~
-    EVALUATE_BUFFER
-  EXTEND_BOTTOM ~%KIVAN_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Kivan.baf~
-    EVALUATE_BUFFER
-  EXTEND_BOTTOM ~%MINSC_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Minsc.baf~
-    EVALUATE_BUFFER
-  EXTEND_BOTTOM ~%MONTARON_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Montaron.baf~
-    EVALUATE_BUFFER
-  EXTEND_BOTTOM ~%QUAYLE_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Quayle.baf~
-    EVALUATE_BUFFER
-  EXTEND_BOTTOM ~%SAFANA_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Safana.baf~
-    EVALUATE_BUFFER
-  EXTEND_BOTTOM ~%SHARTEEL_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!SharTeel.baf~
-    EVALUATE_BUFFER
-  EXTEND_BOTTOM ~%SKIE_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Skie.baf~
-    EVALUATE_BUFFER
-  EXTEND_BOTTOM ~%TIAX_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Tiax.baf~
-    EVALUATE_BUFFER
-  EXTEND_BOTTOM ~%VICONIA_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Viconia.baf~
-    EVALUATE_BUFFER
-  EXTEND_BOTTOM ~%XZAR_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Xzar.baf~
-    EVALUATE_BUFFER
-  EXTEND_BOTTOM ~%YESLICK_BCS%.bcs~   ~GAVIN/Romance/RomanceBAF/B!Yeslick.baf~
-    EVALUATE_BUFFER
+OUTER_SET GAVIN_TIMER = 5400
+INCLUDE ~gavin/romance/romance_main.tpa~
 
-/* Engagement Ring */
-COPY ~GAVIN/bams/b!ringpi.bam~ ~override~
-COPY ~GAVIN/Items/b!pcrin1.EFF~ ~override~
-COPY ~GAVIN/Items/b!pcrin2.EFF~ ~override~
-COPY ~GAVIN/Items/b!pcrin3.EFF~ ~override~
-COPY ~GAVIN/Items/b!pcrin4.EFF~ ~override~
-COPY ~GAVIN/Items/b!pcrin5.EFF~ ~override~
-COPY ~GAVIN/Items/b!pcrin6.EFF~ ~override~
-COPY ~GAVIN/Items/b!pcrin7.EFF~ ~override~
-COPY ~GAVIN/Items/b!pcring.ITM~ ~override~
-  SAY NAME1 @111
-  SAY NAME2 @111
-  SAY UNIDENTIFIED_DESC @112
-  SAY DESC @113
 
-COPY ~GAVIN/bams/b!handi.bam~ ~override~
-COPY ~GAVIN/bams/b!handd.bam~ ~override~
+/////////// FLIRTS //////////////////
 
-COPY ~GAVIN/Items/B!HAND.itm~ ~override~
-  SAY NAME1 @114
-  SAY NAME2 @114
-  SAY UNIDENTIFIED_DESC @115
-  SAY DESC @115
-
-COPY ~GAVIN/bams/b!fingd.bam~ ~override~
-
-COPY ~GAVIN/bams/b!fingg.bam~ ~override~
-COPY ~GAVIN/bams/b!fingi.bam~ ~override~
-COPY ~GAVIN/Items/B!FINGER.itm~ ~override~
-  SAY NAME1 @116
-  SAY NAME2 @116
-  SAY UNIDENTIFIED_DESC @117
-  SAY DESC @117
-
-COPY ~GAVIN/Items/B!GRING2.itm~ ~override~
-  SAY NAME1 @64
-  SAY NAME2 @64
-  SAY UNIDENTIFIED_DESC @118
-  SAY DESC @118
-
-COPY ~GAVIN/Romance/B!REED/B!REED.CRE~ ~override~
-  ADD_CRE_ITEM ~%tutu_var%clck15~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
-  ADD_CRE_ITEM ~%tutu_var%ring06~ #0 #0 #0 ~IDENTIFIED~ ~LRING~
-  ADD_CRE_ITEM ~%tutu_var%ring02~ #0 #0 #0 ~IDENTIFIED~ ~RRING~
-  ADD_CRE_ITEM ~%tutu_var%dagg05~ #50 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
-  ADD_CRE_ITEM ~%tutu_var%dagg03~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON2~
-  ADD_CRE_ITEM ~%tutu_var%potn08~ #2 #0 #0 ~IDENTIFIED~ ~QITEM1~
-  ADD_CRE_ITEM ~%tutu_var%wand04~ #0 #0 #0 ~IDENTIFIED~ ~QITEM2~
-  ADD_CRE_ITEM ~%tutu_var%QITEM26~ #10 #0 #0 ~IDENTIFIED~ ~INV2~
-  SAY NAME1 @119
-  SAY NAME2 @119
-  WRITE_ASCII 0x248 ~B!REED~ #8 // override
-  WRITE_ASCII 0x2cc ~B!REED~ #8 // dialogue
-  WRITE_ASCII 0X34 ~breeds~ #8 //small portrait
-  WRITE_ASCII 0x280 ~B!REED~ #32 //DV
-  SAY INITIAL_MEETING @81
-  SAY DAMAGE @61
-  SAY DYING @62
-  SAY SELECT_COMMON1 @81
-  SAY DIALOGUE_DEFAULT @81
-
-COPY ~GAVIN/Items/b!gavbk.itm~ ~override/b!gavbk.itm~
-  SAY NAME1 @121
-  SAY NAME2 @121
-  SAY UNIDENTIFIED_DESC @122
-  SAY DESC @122
-
-COPY_EXISTING ~%tutu_var%scrltar.itm~ ~override/b!gavscl.itm~
-  SAY NAME1 @123
-  SAY NAME2 @123
-  SAY UNIDENTIFIED_DESC @124
-  SAY DESC @124
-
-BEGIN @125
+BEGIN @125 DESIGNATED 2
 GROUP @100
-  REQUIRE_FILE ~override/GavinRom.B~ @126
+  REQUIRE_PREDICATE ((MOD_IS_INSTALLED ~gavin/gavin.tp2~ ~1~) OR 
+                     (MOD_IS_INSTALLED ~gavin/gavin.tp2~ ~11~) OR 
+                     (MOD_IS_INSTALLED ~gavin/gavin.tp2~ ~12~) OR 
+                     (MOD_IS_INSTALLED ~gavin/gavin.tp2~ ~13~) OR 
+                     (MOD_IS_INSTALLED ~gavin/gavin.tp2~ ~14~)) @126
+LABEL ~b!gavin_flirts~
+  
     EXTEND_BOTTOM ~B!GAVIND.bcs~  ~GAVIN/Flirt/GavinFlirtD.baf~
       EVALUATE_BUFFER
     EXTEND_BOTTOM ~B!GAVIN.bcs~  ~GAVIN/Flirt/GavinFlirtsbaf.baf~
       EVALUATE_BUFFER
     COMPILE EVALUATE_BUFFER ~GAVIN/Flirt/gavinflirts.d~
 
-BEGIN @127
-  REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~FW0100.are~) @128
-  REQUIRE_FILE ~override/GavinRom.B~ @126
+BEGIN @127 DESIGNATED 2
+DEPRECATED ~now in main~
 
-/* Tutu only; detects and adjusts speeds if Tutufix speed adjustment component is installed. */
-/* Always next to last in the tp2 */
-
-  COPY_EXISTING ~_MONTAR.cre~ ~override~
-    READ_BYTE  0x33 "eff_version"
-    READ_LONG  0x2c4 "effects_offset"
-    READ_LONG  0x2c8 "fx_num"
-    SET "adjust_speed" = 0
-    PATCH_IF ("%eff_version%" = 0) BEGIN
-      FOR (loops = 0 ; loops < fx_num ; loops = loops + 1) BEGIN
-        READ_SHORT ("%effects_offset%" + ("%loops%" * 0x30)) "type"
-        PATCH_IF (("%type%" = 176) OR ("%type%" = 126)) BEGIN
-          SET "loops" = "%fx_num%"
-          SET "adjust_speed" = 1
-        END
-      END
-    END ELSE BEGIN
-      FOR (loops = 0 ; loops < fx_num ; loops = loops + 1) BEGIN
-        READ_LONG ("%effects_offset%" + 8 + ("%loops%" * 264)) "type"
-        PATCH_IF (("%type%" = 176) OR ("%type%" = 126)) BEGIN
-          SET "loops" = "%fx_num%"
-          SET "adjust_speed" = 1
-        END
-      END
-    END
-    BUT_ONLY_IF_IT_CHANGES
-
-  COPY_EXISTING ~B!GAVIN.CRE~ ~override~
-    PATCH_IF ("%adjust_speed%" = 1) BEGIN
-      READ_BYTE  0x33  "eff_version"
-      READ_LONG  0x2b0 "known_offset"
-      READ_LONG  0x2b8 "slots_offset"
-      READ_LONG  0x2bc "items_offset"
-      READ_LONG  0x2c4 "effects_offset"
-      READ_LONG  0x2c8 "#effects"
-      WRITE_LONG 0x2c8 ("%#effects%" + 1)
-      PATCH_IF ("%eff_version%" = 0) BEGIN
-        PATCH_IF ("%known_offset%" >= "%effects_offset%") BEGIN
-          WRITE_LONG 0x2b0 ("%known_offset%" + 48)
-        END
-        PATCH_IF ("%slots_offset%" >= "%effects_offset%") BEGIN
-          WRITE_LONG 0x2b8 ("%slots_offset%" + 48)
-        END
-        PATCH_IF ("%items_offset%" >= "%effects_offset%") BEGIN
-          WRITE_LONG 0x2bc ("%items_offset%" + 48)
-        END
-        INSERT_BYTES  ("%effects_offset%"     ) 48
-          WRITE_SHORT ("%effects_offset%"     ) 176
-          WRITE_BYTE  ("%effects_offset%" +  2) 1 // target=self
-          WRITE_LONG  ("%effects_offset%" +  4) 0xfffffffd // walking speed
-          WRITE_LONG  ("%effects_offset%" +  8) 0 // modifier type inc/dec
-          WRITE_BYTE  ("%effects_offset%" + 12) 9 // timing mode permanent
-          WRITE_BYTE  ("%effects_offset%" + 18) 100
-      END ELSE BEGIN
-        PATCH_IF ("%known_offset%" >= "%effects_offset%") BEGIN
-          WRITE_LONG 0x2b0 ("%known_offset%" + 264)
-        END
-        PATCH_IF ("%slots_offset%" >= "%effects_offset%") BEGIN
-          WRITE_LONG 0x2b8 ("%slots_offset%" + 264)
-        END
-        PATCH_IF ("%items_offset%" >= "%effects_offset%") BEGIN
-          WRITE_LONG 0x2bc ("%items_offset%" + 264)
-        END
-        INSERT_BYTES  ("%effects_offset%"     ) 264
-          WRITE_LONG  ("%effects_offset%" +  8) 176
-          WRITE_LONG  ("%effects_offset%" + 12) 1
-          WRITE_LONG  ("%effects_offset%" + 20) 0xfffffffd
-          WRITE_LONG  ("%effects_offset%" + 24) 0
-          WRITE_LONG  ("%effects_offset%" + 28) 9
-          WRITE_SHORT ("%effects_offset%" + 36) 100
-      END
-    END
-    BUT_ONLY_IF_IT_CHANGES
-
-/*
-BEGIN @129
+BEGIN @136 DESIGNATED 4
   SUBCOMPONENT @130
   REQUIRE_COMPONENT ~Gavin.tp2~ 0 @131
-  
-  LAF cd_portrait_npc STR_VAR source = ~b!gavin~ destination = ~bgavin~ source_path = ~gavin/portraits~ END
-*/
-BEGIN @136
-  SUBCOMPONENT @130
-  REQUIRE_COMPONENT ~Gavin.tp2~ 0 @131
+  LABEL ~b!gavin_portrait_alt_1~
   
   LAF cd_portrait_npc STR_VAR source = ~amgav~ destination = ~bgavin~ source_path = ~gavin/portraits~ END
   
-BEGIN @137
+BEGIN @137 DESIGNATED 5
   SUBCOMPONENT @130
   REQUIRE_COMPONENT ~Gavin.tp2~ 0 @131
+  LABEL ~b!gavin_portrait_alt_2~
   
   LAF cd_portrait_npc STR_VAR source = ~b!gavin4~ destination = ~bgavin~ source_path = ~gavin/portraits~ END
   
-BEGIN @138
+BEGIN @138 DESIGNATED 6 
   SUBCOMPONENT @130
   REQUIRE_COMPONENT ~Gavin.tp2~ 0 @131
+  LABEL ~b!gavin_portrait_alt_3~
   
   LAF cd_portrait_npc STR_VAR source = ~b!gavin5~ destination = ~bgavin~ source_path = ~gavin/portraits~ END
   
-BEGIN @132
+BEGIN @132 DESIGNATED 7
   SUBCOMPONENT @130
   REQUIRE_COMPONENT ~Gavin.tp2~ 0 @131
+  LABEL ~b!gavin_portrait_alt_4~
   
   LAF cd_portrait_npc STR_VAR source = ~b!gavin1~ destination = ~bgavin~ source_path = ~gavin/portraits~ END
   
-BEGIN @133
+BEGIN @133 DESIGNATED 8
   SUBCOMPONENT @130
   REQUIRE_COMPONENT ~Gavin.tp2~ 0 @131
+  LABEL ~b!gavin_portrait_alt_5~
   
   LAF cd_portrait_npc STR_VAR source = ~b!gavin2~ destination = ~bgavin~ source_path = ~gavin/portraits~ END
   
-BEGIN @2003 
+BEGIN @2003 DESIGNATED 9
   SUBCOMPONENT @130
   REQUIRE_COMPONENT ~Gavin.tp2~ 0 @131
+  LABEL ~b!gavin_portrait_alt_6~
   
   LAF cd_portrait_npc STR_VAR source = ~b_gav1~ destination = ~bgavin~ source_path = ~gavin/portraits~ END
 
@@ -1409,8 +1207,9 @@ BEGIN @2003
 
 /* Always keep last in the tp2 */
 
-BEGIN @134
+BEGIN @134 DESIGNATED 10
   REQUIRE_COMPONENT ~Gavin.tp2~ 0 @135
+  LABEL ~b!gavin_pid~
     COMPILE EVALUATE_BUFFER ~GAVIN/PID/PIDnight.d~
     COMPILE EVALUATE_BUFFER ~GAVIN/PID/B!GavinPID.d~
     EXTEND_BOTTOM ~B!GAVIND.bcs~ ~GAVIN/PID/PIDinitD.baf~
