@@ -787,24 +787,9 @@ EXTEND_BOTTOM ~B!GAVIN.bcs~ ~GAVIN/BAF/B!GavinFriendBreaks.baf~
   EVALUATE_BUFFER
 
 //Script extension
-ACTION_IF FILE_EXISTS_IN_GAME ~FW0100.are~ THEN BEGIN
-  EXTEND_BOTTOM ~_AR3300.bcs~ ~GAVIN/BAF/B!FW3300.baf~
-    EVALUATE_BUFFER
-  EXTEND_BOTTOM ~_AR3400.bcs~ ~GAVIN/BAF/B!FW3400.baf~
-    EVALUATE_BUFFER
-  EXTEND_BOTTOM ~_AR0800.bcs~ ~GAVIN/BAF/B!FW0800.baf~
-    EVALUATE_BUFFER
-END
-
-
-ACTION_IF GAME_IS ~bgt bgee eet~ THEN BEGIN
-  EXTEND_BOTTOM ~%Beregost%.bcs~ ~GAVIN/BAF/B!FW3300.baf~
-    EVALUATE_BUFFER
-  EXTEND_BOTTOM ~%Temple%.bcs~ ~GAVIN/BAF/B!FW3400.baf~
-    EVALUATE_BUFFER
-  EXTEND_BOTTOM ~%EBaldursGate%.bcs~ ~GAVIN/BAF/B!FW0800.baf~
-    EVALUATE_BUFFER
-END
+EXTEND_BOTTOM ~%Beregost_BCS%.bcs~ ~GAVIN/BAF/B!FW3300.baf~ EVALUATE_BUFFER
+EXTEND_BOTTOM ~%Temple_BCS%.bcs~ ~GAVIN/BAF/B!FW3400.baf~ EVALUATE_BUFFER
+EXTEND_BOTTOM ~%EBaldursGate_BCS%.bcs~ ~GAVIN/BAF/B!FW0800.baf~ EVALUATE_BUFFER
 
 /* Unlock door Door1007 */
 COPY_EXISTING ~%UlgothsBeard%.are~ ~override~
@@ -818,15 +803,7 @@ COPY_EXISTING ~%UlgothsBeard%.are~ ~override~
 BUT_ONLY
 
 
-ACTION_IF GAME_IS ~tutu_totsc~ THEN BEGIN// if TotSC is installed
-  EXTEND_BOTTOM ~_AR1000.bcs~ ~GAVIN/BAF/B!FW1000.baf~
-    EVALUATE_BUFFER
-END
-
-ACTION_IF GAME_IS ~bgt bgee eet~ THEN BEGIN// if TotSC is installed
-  EXTEND_BOTTOM ~%UlgothsBeard%.bcs~ ~GAVIN/BAF/B!FW1000.baf~
-    EVALUATE_BUFFER
-END
+EXTEND_BOTTOM ~%UlgothsBeard_BCS%.bcs~ ~GAVIN/BAF/B!FW1000.baf~ EVALUATE_BUFFER
 
 //dream script compilation
 COMPILE EVALUATE_BUFFER ~GAVIN/BAF/B!GAVIND.baf~
@@ -875,32 +852,33 @@ COMPILE EVALUATE_BUFFER ~GAVIN/BAF/B!GAVIND.baf~
 
 /* Getting rid of the occupants of the quest area */
 ACTION_IF GAME_IS ~tutu tutu_totsc bgt bgee~ THEN BEGIN
-COPY_EXISTING ~%tutu_var%SLEEPMH.CRE~ ~override~
-  SAY NAME1 @66
-  SAY NAME2 @66
-  WRITE_EVALUATED_ASCII 0x250 ~%tutu_var%SLEEPMH~ #8 // class
-//  WRITE_EVALUATED_ASCII 0x280 ~%tutu_var%SLEEPMH~ #32 //DV
-  BUT_ONLY_IF_IT_CHANGES
 
-COPY_EXISTING ~%tutu_var%SLEEPFH.CRE~ ~override~
-  SAY NAME1 @67
-  SAY NAME2 @67
-  WRITE_EVALUATED_ASCII 0x250 ~%tutu_var%SLEEPFH~ #8 // class
-//  WRITE_EVALUATED_ASCII 0x280 ~%tutu_var%SLEEPFH~ #32 //DV
-  BUT_ONLY_IF_IT_CHANGES
-END
+  COPY_EXISTING ~%tutu_var%SLEEPMH.CRE~ ~override~
+    SAY NAME1 @66
+    SAY NAME2 @66
+    WRITE_EVALUATED_ASCII 0x250 ~%tutu_var%SLEEPMH~ #8 // class
+  //  WRITE_EVALUATED_ASCII 0x280 ~%tutu_var%SLEEPMH~ #32 //DV
+    BUT_ONLY_IF_IT_CHANGES
 
-/* this does probably the same but it's newer syntax */
-ACTION_IF GAME_IS ~eet~ THEN BEGIN
-COPY_EXISTING ~SLEEPMH.CRE~ ~override~
-	WRITE_ASCII SCRIPT_CLASS ~SLEEPMH~ #8
-//	WRITE_ASCII DEATHVAR ~SLEEPMH~ #32
-BUT_ONLY
+  COPY_EXISTING ~%tutu_var%SLEEPFH.CRE~ ~override~
+    SAY NAME1 @67
+    SAY NAME2 @67
+    WRITE_EVALUATED_ASCII 0x250 ~%tutu_var%SLEEPFH~ #8 // class
+  //  WRITE_EVALUATED_ASCII 0x280 ~%tutu_var%SLEEPFH~ #32 //DV
+    BUT_ONLY_IF_IT_CHANGES
+    
+END ELSE BEGIN /* this does probably the same but it's newer syntax */
 
-COPY_EXISTING ~SLEEPFH.CRE~ ~override~
-	WRITE_ASCII SCRIPT_CLASS ~SLEEPFH~ #8
-//	WRITE_ASCII DEATHVAR ~SLEEPFH~ #32
-BUT_ONLY
+  COPY_EXISTING ~SLEEPMH.CRE~ ~override~
+    WRITE_ASCII SCRIPT_CLASS ~SLEEPMH~ #8
+  //	WRITE_ASCII DEATHVAR ~SLEEPMH~ #32
+  BUT_ONLY
+
+  COPY_EXISTING ~SLEEPFH.CRE~ ~override~
+    WRITE_ASCII SCRIPT_CLASS ~SLEEPFH~ #8
+  //	WRITE_ASCII DEATHVAR ~SLEEPFH~ #32
+  BUT_ONLY
+  
 END
 
 
@@ -912,25 +890,23 @@ COPY ~Gavin/Quest/QuestCRE/B!PENNY.CRE~ ~override~
   ADD_CRE_ITEM ~%tutu_var%potn14~ #0 #0 #0 ~IDENTIFIED~ ~QITEM1~
   SAY NAME1 @68
   SAY NAME2 @68
-  WRITE_ASCII 0x248 ~B!PENNY~ #8 // override
-  WRITE_ASCII 0x2cc ~B!PENNY~ #8 // dialogue
-  WRITE_ASCII 0x280 ~B!PENNY~ #32 //DV
   SAY INITIAL_MEETING @69
   SAY DAMAGE @70
   SAY DYING @71
   SAY SELECT_COMMON1 @69
+  WRITE_ASCIIE 0x250 ~%tutu_scriptt%hfshout~
+  WRITE_ASCIIE 0x268 ~%tutu_var%default~
 
 COPY ~Gavin/Quest/QuestCRE/B!GUSTAV.CRE~ ~override~
   SAY NAME1 @72
   SAY NAME2 @72
-  WRITE_ASCII 0x248 ~B!GUSTAV~ #8 // override
-  WRITE_ASCII 0x2cc ~B!GUSTAV~ #8 // dialogue
-  WRITE_ASCII 0x280 ~B!GUSTAV~ #32 //DV
   SAY INITIAL_MEETING @73
   SAY DAMAGE @74
   SAY DYING @75
   SAY SELECT_COMMON1 @73
   SAY DIALOGUE_DEFAULT @73
+  WRITE_ASCIIE 0x250 ~%tutu_var%noblpa1~
+  WRITE_ASCIIE 0x268 ~%tutu_scriptw%trungst~
 
 COPY ~Gavin/Quest/QuestCRE/B!BERTRA.CRE~ ~override~
   ADD_CRE_ITEM ~%tutu_var%helm09~ #0 #0 #0 ~IDENTIFIED~ ~HELMET~
@@ -943,13 +919,6 @@ COPY ~Gavin/Quest/QuestCRE/B!BERTRA.CRE~ ~override~
   ADD_CRE_ITEM ~%tutu_var%misc31~ #3 #0 #0 ~IDENTIFIED~ ~INV2~
   SAY NAME1 @76
   SAY NAME2 @76
-  WRITE_ASCII 0x248 ~B!BERTRA~ #8  // override
-  WRITE_ASCII 0x2cc ~B!BERTRA~ #8  // dialogue
-  WRITE_ASCII 0x280 ~B!BERTRA~ #32 //DV
-/*
-  WRITE_ASCII 0x250 ~~ #8          //class
-  WRITE_ASCII 0x268 ~~ #8          // default
-*/
   SAY INITIAL_MEETING @77
   SAY BATTLE_CRY1 @77
   SAY BATTLE_CRY2 @77
@@ -960,6 +929,9 @@ COPY ~Gavin/Quest/QuestCRE/B!BERTRA.CRE~ ~override~
   SAY DYING @79
   SAY SELECT_COMMON1 @77
   SAY DIALOGUE_DEFAULT @77
+  WRITE_ASCIIE 0x250 ~%tutu_var%priest4~
+  WRITE_ASCIIE 0x258 ~%tutu_var%priest5~
+  WRITE_ASCIIE 0x268 ~%tutu_scriptw%tasight~
 
 COPY ~Gavin/Quest/QuestCRE/B!VALER.CRE~ ~override~
   ADD_CRE_ITEM ~%tutu_var%clck17~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
@@ -973,13 +945,6 @@ COPY ~Gavin/Quest/QuestCRE/B!VALER.CRE~ ~override~
   ADD_CRE_ITEM ~%tutu_var%STAF02~ #2 #0 #0 ~identified&unstealable~ ~INV4~
   SAY NAME1 @80
   SAY NAME2 @80
-  WRITE_ASCII 0x248 ~B!VALER~ #8 // override
-  WRITE_ASCII 0x2cc ~B!VALER~ #8 // dialogue
-  WRITE_ASCII 0x280 ~B!VALER~ #32 //DV
-/*
-  WRITE_ASCII 0x250 ~~ #8          //class
-  WRITE_ASCII 0x268 ~~ #8          // default
-*/
   SAY INITIAL_MEETING @81
   SAY BATTLE_CRY1 @82
   SAY BATTLE_CRY2 @82
@@ -989,6 +954,8 @@ COPY ~Gavin/Quest/QuestCRE/B!VALER.CRE~ ~override~
   SAY DAMAGE @83
   SAY DYING @84
   SAY SELECT_COMMON1 @81
+  WRITE_ASCIIE 0x250 ~%tutu_var%mage4~
+  WRITE_ASCIIE 0x268 ~%tutu_scriptw%tasight~
 
 COPY ~Gavin/Quest/QuestCRE/B!THUG1.CRE~ ~override~
   ADD_CRE_ITEM ~%tutu_var%leat04~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
@@ -996,9 +963,6 @@ COPY ~Gavin/Quest/QuestCRE/B!THUG1.CRE~ ~override~
   ADD_CRE_ITEM ~%tutu_var%AX1H01~ #0 #0 #0 ~IDENTIFIED~ ~SHIELD~
   SAY NAME1 @85
   SAY NAME2 @85
-  WRITE_ASCII 0x248 ~B!THUG1~ #8 // override
-  WRITE_ASCII 0x2cc ~B!THUG1~ #8 // dialogue
-  WRITE_ASCII 0x280 ~B!THUG1~ #32 //DV
   SAY INITIAL_MEETING @86
   SAY BATTLE_CRY1 @86
   SAY BATTLE_CRY2 @86
@@ -1009,6 +973,8 @@ COPY ~Gavin/Quest/QuestCRE/B!THUG1.CRE~ ~override~
   SAY DYING @88
   SAY SELECT_COMMON1 @86
   SAY DIALOGUE_DEFAULT @86
+  WRITE_ASCIIE 0x250 ~%tutu_scriptw%tasight~
+  WRITE_ASCIIE 0x268 ~%tutu_var%default~
 
 COPY ~Gavin/Quest/QuestCRE/B!THUG2.CRE~ ~override~
   ADD_CRE_ITEM ~%tutu_var%leat04~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
@@ -1016,9 +982,6 @@ COPY ~Gavin/Quest/QuestCRE/B!THUG2.CRE~ ~override~
   ADD_CRE_ITEM ~%tutu_var%AX1H01~ #0 #0 #0 ~IDENTIFIED~ ~SHIELD~
   SAY NAME1 @89
   SAY NAME2 @89
-  WRITE_ASCII 0x248 ~B!THUG2~ #8 // override
-  WRITE_ASCII 0x2cc ~B!THUG2~ #8 // dialogue
-  WRITE_ASCII 0x280 ~B!THUG2~ #32 //DV
   SAY INITIAL_MEETING @90
   SAY BATTLE_CRY1 @90
   SAY BATTLE_CRY2 @90
@@ -1030,6 +993,8 @@ COPY ~Gavin/Quest/QuestCRE/B!THUG2.CRE~ ~override~
   SAY SELECT_COMMON1 @93
   SAY SELECT_COMMON2 @94
   SAY DIALOGUE_DEFAULT @93
+  WRITE_ASCIIE 0x250 ~%tutu_scriptw%tasight~
+  WRITE_ASCIIE 0x268 ~%tutu_var%default~
 
 COPY ~Gavin/Quest/QuestCRE/B!THUG3.CRE~ ~override~
   ADD_CRE_ITEM ~%tutu_var%leat04~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
@@ -1037,9 +1002,6 @@ COPY ~Gavin/Quest/QuestCRE/B!THUG3.CRE~ ~override~
   ADD_CRE_ITEM ~%tutu_var%AX1H01~ #0 #0 #0 ~IDENTIFIED~ ~SHIELD~
   SAY NAME1 @95
   SAY NAME2 @95
-  WRITE_ASCII 0x248 ~B!THUG3~ #8 // override
-  WRITE_ASCII 0x2cc ~B!THUG3~ #8 // dialogue
-  WRITE_ASCII 0x280 ~B!THUG3~ #32 //DV
   SAY INITIAL_MEETING @90
   SAY BATTLE_CRY1 @90
   SAY BATTLE_CRY2 @90
@@ -1051,6 +1013,8 @@ COPY ~Gavin/Quest/QuestCRE/B!THUG3.CRE~ ~override~
   SAY SELECT_COMMON1 @93
   SAY SELECT_COMMON2 @94
   SAY DIALOGUE_DEFAULT @93
+  WRITE_ASCIIE 0x250 ~%tutu_scriptw%tasight~
+  WRITE_ASCIIE 0x268 ~%tutu_var%default~
 
 COPY_EXISTING ~%tutu_var%SERVAN.CRE~ ~override/B!MESNGR.CRE~
   SAY NAME1 @96
