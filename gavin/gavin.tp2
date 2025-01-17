@@ -14,18 +14,18 @@ Known Issues:
 */
 
 /* Backup folder */
-BACKUP ~gavin/backup~
+BACKUP ~weidu_external/gavin/backup~
 
 /* Author */
-AUTHOR ~www.gibberlings3.net~ //berelinde@gmail.com
+SUPPORT ~https://www.gibberlings3.net/forums/forum/128-gavin/~ //berelinde@gmail.com
 
 /* enable all error messages; nothing suppressed. comment this out for release version */
 //MODDER
 
-VERSION ~14.1~ 180312
+VERSION ~15~
 
 /* launch the readme file immediately. */
-README ~gavin/readme-gavin.html~
+README ~gavin/readme-gavin-%LANGUAGE%.html~ ~gavin/readme-gavin.html~
 
 ALLOW_MISSING // allow if BG Graphics night WEDs are not installed
 AR6700N.WED
