@@ -14,7 +14,7 @@ This mod adds Gavin, an NPC cleric of Lathander, to the Baldur's Gate conversion
 
 ## More Information
 
-:page_facing_up: [Project Page](http://www.gibberlings3.net/gavin/)  
+:page_facing_up: [Project Page](https://www.gibberlings3.net/mods/npcs/gavin/)  
 :page_facing_up: [Readme](https://gibberlings3.github.io/Documentation/readmes/readme-gavin.html)  
 :page_facing_up: [Forum](https://www.gibberlings3.net/forums/forum/128-gavin/) 
 
