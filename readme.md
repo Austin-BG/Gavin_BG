@@ -6,7 +6,7 @@
 
 ![The G3 Logo](https://raw.githubusercontent.com/Gibberlings3/.github/master/profile/g3_neutral.png)
 
-# Gavin NPC mod for BG Tutu, BGT-WeiDU, BG:EE, or EET
+# Gavin NPC Mod for BGEE, EET, BGT, or Tutu
 
 ## Overview
 
