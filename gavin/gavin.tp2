@@ -38,6 +38,8 @@ ALWAYS
   ACTION_IF !VARIABLE_IS_SET cd_gavin_bg_always THEN BEGIN // check to make this happen only once per install 
       
     OUTER_SET cd_gavin_bg_always = 1
+    
+    INCLUDE ~gavin/lib/cd_portrait_copy.tph~
 
     /* These actions are processed for every component: reading of variables */
 
@@ -544,16 +546,8 @@ END
 
 /* Add locksmith in case keys don't appear */ 
 
-ACTION_IF FILE_EXISTS_IN_GAME ~FW0100.are~ THEN BEGIN
-  EXTEND_BOTTOM ~_AR3351.bcs~ ~GAVIN/BAF/b!ar3351.baf~
+EXTEND_BOTTOM ~%Beregost_FeldepostsInn_L1_BCS%.bcs~ ~GAVIN/BAF/b!ar3351.baf~
     EVALUATE_BUFFER
-END
-
-
-ACTION_IF GAME_IS ~bgt bgee eet~ THEN BEGIN
-  EXTEND_BOTTOM ~%Beregost_FeldepostsInn_L1%.bcs~ ~GAVIN/BAF/b!ar3351.baf~
-    EVALUATE_BUFFER
-END 
 
 COPY ~gavin/cre/b!gavlok.cre~ ~override~ 
   SAY NAME1 @1234 
@@ -563,17 +557,7 @@ COMPILE ~gavin/quest/questdlg/b!gavlok.d~
 
 
 /* Portrait Assignment */
-//MKDIR ~portraits~ 
-
-ACTION_IF GAME_IS ~bgt tutu tutu_totsc~ THEN BEGIN
-COPY ~GAVIN/portraits/B!GAVINL.bmp~ ~override/bgavinL.bmp~
-COPY ~GAVIN/portraits/B!GAVINS.bmp~ ~override/bgavinS.bmp~
-END
-
-ACTION_IF GAME_IS ~bgee eet~ THEN BEGIN
-COPY ~GAVIN/portraits/portraits_ee/B!GAVINM.bmp~ ~override/bgavinL.bmp~
-COPY ~GAVIN/portraits/portraits_ee/B!GAVINS.bmp~ ~override/bgavinS.bmp~
-END
+LAF cd_portrait_npc STR_VAR source = ~b!gavin~ destination = ~bgavin~ source_path = ~gavin/portraits~ END
 
 /* GAVIN'S RING */
 
@@ -1415,83 +1399,44 @@ BEGIN @127
 BEGIN @129
   SUBCOMPONENT @130
   REQUIRE_COMPONENT ~Gavin.tp2~ 0 @131
-   ACTION_IF GAME_IS ~bgt tutu tutu_totsc~ THEN BEGIN
-    COPY ~GAVIN/portraits/B!GAVINL.bmp~ ~override/bgavinL.bmp~
-    COPY ~GAVIN/portraits/B!GAVINS.bmp~ ~override/bgavinS.bmp~
-   END
-   ACTION_IF GAME_IS ~bgee eet~ THEN BEGIN
-    COPY ~GAVIN/portraits/portraits_ee/B!GAVINM.bmp~ ~override/bgavinL.bmp~
-    COPY ~GAVIN/portraits/portraits_ee/B!GAVINS.bmp~ ~override/bgavinS.bmp~
-   END
+  
+  LAF cd_portrait_npc STR_VAR source = ~b!gavin~ destination = ~bgavin~ source_path = ~gavin/portraits~ END
 */
 BEGIN @136
   SUBCOMPONENT @130
   REQUIRE_COMPONENT ~Gavin.tp2~ 0 @131
-   ACTION_IF GAME_IS ~bgt tutu tutu_totsc~ THEN BEGIN
-    COPY ~GAVIN/portraits/AMGAVM.bmp~ ~override/bgavinL.bmp~
-    COPY ~GAVIN/portraits/AMGAVS.bmp~ ~override/bgavinS.bmp~
-   END
-   ACTION_IF GAME_IS ~bgee eet~ THEN BEGIN
-    COPY ~GAVIN/portraits/portraits_ee/AMGAVM.bmp~ ~override/bgavinL.bmp~
-    COPY ~GAVIN/portraits/portraits_ee/AMGAVS.bmp~ ~override/bgavinS.bmp~
-   END
+  
+  LAF cd_portrait_npc STR_VAR source = ~amgav~ destination = ~bgavin~ source_path = ~gavin/portraits~ END
+  
 BEGIN @137
   SUBCOMPONENT @130
   REQUIRE_COMPONENT ~Gavin.tp2~ 0 @131
-   ACTION_IF GAME_IS ~bgt tutu tutu_totsc~ THEN BEGIN
-    COPY ~GAVIN/portraits/b!gavin4l.bmp~ ~override/bgavinL.bmp~
-    COPY ~GAVIN/portraits/b!gavin4s.bmp~ ~override/bgavinS.bmp~
-   END
-   ACTION_IF GAME_IS ~bgee eet~ THEN BEGIN
-    COPY ~GAVIN/portraits/portraits_ee/b!gavin4m.bmp~ ~override/bgavinL.bmp~
-    COPY ~GAVIN/portraits/portraits_ee/b!gavin4s.bmp~ ~override/bgavinS.bmp~
-   END
+  
+  LAF cd_portrait_npc STR_VAR source = ~b!gavin4~ destination = ~bgavin~ source_path = ~gavin/portraits~ END
+  
 BEGIN @138
   SUBCOMPONENT @130
   REQUIRE_COMPONENT ~Gavin.tp2~ 0 @131
-   ACTION_IF GAME_IS ~bgt tutu tutu_totsc~ THEN BEGIN
-    COPY ~GAVIN/portraits/b!gavin5l.bmp~ ~override/bgavinL.bmp~
-    COPY ~GAVIN/portraits/b!gavin5s.bmp~ ~override/bgavinS.bmp~
-   END
-   ACTION_IF GAME_IS ~bgee eet~ THEN BEGIN
-    COPY ~GAVIN/portraits/portraits_ee/b!gavin5m.bmp~ ~override/bgavinL.bmp~
-    COPY ~GAVIN/portraits/portraits_ee/b!gavin5s.bmp~ ~override/bgavinS.bmp~
-   END
+  
+  LAF cd_portrait_npc STR_VAR source = ~b!gavin5~ destination = ~bgavin~ source_path = ~gavin/portraits~ END
+  
 BEGIN @132
   SUBCOMPONENT @130
   REQUIRE_COMPONENT ~Gavin.tp2~ 0 @131
-   ACTION_IF GAME_IS ~bgt tutu tutu_totsc~ THEN BEGIN
-    COPY ~GAVIN/portraits/B!Gavin1L.bmp~ ~override/bgavinL.bmp~
-    COPY ~GAVIN/portraits/B!Gavin1S.bmp~ ~override/bgavinS.bmp~
-   END
-   ACTION_IF GAME_IS ~bgee eet~ THEN BEGIN
-    COPY ~GAVIN/portraits/portraits_ee/B!Gavin1m.bmp~ ~override/bgavinL.bmp~
-    COPY ~GAVIN/portraits/portraits_ee/B!Gavin1S.bmp~ ~override/bgavinS.bmp~
-   END
+  
+  LAF cd_portrait_npc STR_VAR source = ~b!gavin1~ destination = ~bgavin~ source_path = ~gavin/portraits~ END
+  
 BEGIN @133
   SUBCOMPONENT @130
   REQUIRE_COMPONENT ~Gavin.tp2~ 0 @131
-   ACTION_IF GAME_IS ~bgt tutu tutu_totsc~ THEN BEGIN
-    COPY ~GAVIN/portraits/B!Gavin2L.bmp~ ~override/bgavinL.bmp~
-    COPY ~GAVIN/portraits/B!Gavin2S.bmp~ ~override/bgavinS.bmp~
-   END
-   ACTION_IF GAME_IS ~bgee eet~ THEN BEGIN
-    COPY ~GAVIN/portraits/portraits_ee/B!Gavin2m.bmp~ ~override/bgavinL.bmp~
-    COPY ~GAVIN/portraits/portraits_ee/B!Gavin2S.bmp~ ~override/bgavinS.bmp~
-   END
+  
+  LAF cd_portrait_npc STR_VAR source = ~b!gavin2~ destination = ~bgavin~ source_path = ~gavin/portraits~ END
+  
 BEGIN @2003 
   SUBCOMPONENT @130
   REQUIRE_COMPONENT ~Gavin.tp2~ 0 @131
-   ACTION_IF GAME_IS ~bgt tutu tutu_totsc~ THEN BEGIN
-    COPY ~GAVIN/portraits/b_gav1M.bmp~ ~override/bgavinL.bmp~
-    COPY ~GAVIN/portraits/b_gav1S.bmp~ ~override/bgavinS.bmp~
-   END
-   ACTION_IF GAME_IS ~bgee eet~ THEN BEGIN
-    COPY ~GAVIN/portraits/portraits_ee/b_gav1M.bmp~ ~override/bgavinL.bmp~
-    COPY ~GAVIN/portraits/portraits_ee/b_gav1S.bmp~ ~override/bgavinS.bmp~
-   END
-
-
+  
+  LAF cd_portrait_npc STR_VAR source = ~b_gav1~ destination = ~bgavin~ source_path = ~gavin/portraits~ END
 
 /////////////////////////////////
 /////////// Install PID /////////
