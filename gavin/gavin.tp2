@@ -27,12 +27,6 @@ VERSION ~15~
 /* launch the readme file immediately. */
 README ~gavin/readme-gavin-%LANGUAGE%.html~ ~gavin/readme-gavin.html~
 
-ALLOW_MISSING // allow if BG Graphics night WEDs are not installed
-AR6700N.WED
-FW3300N.WED
-AR3300N.WED
-BG3300N.WED
-
 ALWAYS
 
 /* check for a ready SoD */
@@ -364,7 +358,7 @@ COPY_EXISTING ~%Beregost%.wed~ override
     WRITE_LONG (sec_hdr + 0xc) (wall_offset + 0x1a)
     WRITE_LONG (sec_hdr + 0x10) (poly_table + 0x1a + 0x24)
   END
-BUT_ONLY
+BUT_ONLY IF_EXISTS
 
 COPY_EXISTING ~%Beregost%.are~ override
   PATCH_IF SOURCE_SIZE > 0x28f BEGIN
