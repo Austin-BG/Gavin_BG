@@ -750,10 +750,10 @@ ACTION_IF GAME_IS ~tutu_totsc bgt bgee eet~ THEN BEGIN// if TotSC is installed
   COPY ~GAVIN/CRE/B!DARLOS.CRE~ ~override~
     SAY NAME1 @54
     SAY NAME2 @54
-    WRITE_ASCIIE 0x250 ~%tutu_var%shout~
-    WRITE_ASCIIE 0x258 ~%tutu_var%mtowbez~
-    WRITE_ASCIIE 0x260 ~%tutu_scriptr%unenemy~
-    WRITE_ASCIIE 0x268 ~%tutu_scriptw%drungst~
+    WRITE_ASCIIE 0x250 ~%tutu_var%shout~ #8
+    WRITE_ASCIIE 0x258 ~%tutu_var%mtowbez~ #8
+    WRITE_ASCIIE 0x260 ~%tutu_scriptr%unenemy~ #8
+    WRITE_ASCIIE 0x268 ~%tutu_scriptw%drungst~ #8
     SAY INITIAL_MEETING @55
     SAY DAMAGE @56
     SAY DYING @57
@@ -764,10 +764,10 @@ ACTION_IF GAME_IS ~tutu_totsc bgt bgee eet~ THEN BEGIN// if TotSC is installed
   COPY ~GAVIN/CRE/B!EVIE.CRE~ ~override~
     SAY NAME1 @59
     SAY NAME2 @59
-    WRITE_ASCIIE 0x250 ~%tutu_var%shout~
-    WRITE_ASCIIE 0x258 ~%tutu_var%ftownaz~
-    WRITE_ASCIIE 0x260 ~%tutu_scriptr%unenemy~
-    WRITE_ASCIIE 0x268 ~%tutu_scriptw%drungst~
+    WRITE_ASCIIE 0x250 ~%tutu_var%shout~ #8
+    WRITE_ASCIIE 0x258 ~%tutu_var%ftownaz~ #8
+    WRITE_ASCIIE 0x260 ~%tutu_scriptr%unenemy~ #8
+    WRITE_ASCIIE 0x268 ~%tutu_scriptw%drungst~ #8
     SAY INITIAL_MEETING @60
     SAY DAMAGE @61
     SAY DYING @62
@@ -894,8 +894,8 @@ COPY ~Gavin/Quest/QuestCRE/B!PENNY.CRE~ ~override~
   SAY DAMAGE @70
   SAY DYING @71
   SAY SELECT_COMMON1 @69
-  WRITE_ASCIIE 0x250 ~%tutu_scriptt%hfshout~
-  WRITE_ASCIIE 0x268 ~%tutu_var%default~
+  WRITE_ASCIIE 0x250 ~%tutu_scriptt%hfshout~ #8
+  WRITE_ASCIIE 0x268 ~%tutu_var%default~ #8
 
 COPY ~Gavin/Quest/QuestCRE/B!GUSTAV.CRE~ ~override~
   SAY NAME1 @72
@@ -905,8 +905,8 @@ COPY ~Gavin/Quest/QuestCRE/B!GUSTAV.CRE~ ~override~
   SAY DYING @75
   SAY SELECT_COMMON1 @73
   SAY DIALOGUE_DEFAULT @73
-  WRITE_ASCIIE 0x250 ~%tutu_var%noblpa1~
-  WRITE_ASCIIE 0x268 ~%tutu_scriptw%trungst~
+  WRITE_ASCIIE 0x250 ~%tutu_var%noblpa1~ #8
+  WRITE_ASCIIE 0x268 ~%tutu_scriptw%trungst~ #8
 
 COPY ~Gavin/Quest/QuestCRE/B!BERTRA.CRE~ ~override~
   ADD_CRE_ITEM ~%tutu_var%helm09~ #0 #0 #0 ~IDENTIFIED~ ~HELMET~
@@ -929,9 +929,9 @@ COPY ~Gavin/Quest/QuestCRE/B!BERTRA.CRE~ ~override~
   SAY DYING @79
   SAY SELECT_COMMON1 @77
   SAY DIALOGUE_DEFAULT @77
-  WRITE_ASCIIE 0x250 ~%tutu_var%priest4~
-  WRITE_ASCIIE 0x258 ~%tutu_var%priest5~
-  WRITE_ASCIIE 0x268 ~%tutu_scriptw%tasight~
+  WRITE_ASCIIE 0x250 ~%tutu_var%priest4~ #8
+  WRITE_ASCIIE 0x258 ~%tutu_var%priest5~ #8
+  WRITE_ASCIIE 0x268 ~%tutu_scriptw%tasight~ #8
 
 COPY ~Gavin/Quest/QuestCRE/B!VALER.CRE~ ~override~
   ADD_CRE_ITEM ~%tutu_var%clck17~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
@@ -954,8 +954,8 @@ COPY ~Gavin/Quest/QuestCRE/B!VALER.CRE~ ~override~
   SAY DAMAGE @83
   SAY DYING @84
   SAY SELECT_COMMON1 @81
-  WRITE_ASCIIE 0x250 ~%tutu_var%mage4~
-  WRITE_ASCIIE 0x268 ~%tutu_scriptw%tasight~
+  WRITE_ASCIIE 0x250 ~%tutu_var%mage4~ #8
+  WRITE_ASCIIE 0x268 ~%tutu_scriptw%tasight~ #8
 
 COPY ~Gavin/Quest/QuestCRE/B!THUG1.CRE~ ~override~
   ADD_CRE_ITEM ~%tutu_var%leat04~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
@@ -973,8 +973,8 @@ COPY ~Gavin/Quest/QuestCRE/B!THUG1.CRE~ ~override~
   SAY DYING @88
   SAY SELECT_COMMON1 @86
   SAY DIALOGUE_DEFAULT @86
-  WRITE_ASCIIE 0x250 ~%tutu_scriptw%tasight~
-  WRITE_ASCIIE 0x268 ~%tutu_var%default~
+  WRITE_ASCIIE 0x250 ~%tutu_scriptw%tasight~ #8
+  WRITE_ASCIIE 0x268 ~%tutu_var%default~ #8
 
 COPY ~Gavin/Quest/QuestCRE/B!THUG2.CRE~ ~override~
   ADD_CRE_ITEM ~%tutu_var%leat04~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
@@ -993,8 +993,8 @@ COPY ~Gavin/Quest/QuestCRE/B!THUG2.CRE~ ~override~
   SAY SELECT_COMMON1 @93
   SAY SELECT_COMMON2 @94
   SAY DIALOGUE_DEFAULT @93
-  WRITE_ASCIIE 0x250 ~%tutu_scriptw%tasight~
-  WRITE_ASCIIE 0x268 ~%tutu_var%default~
+  WRITE_ASCIIE 0x250 ~%tutu_scriptw%tasight~ #8
+  WRITE_ASCIIE 0x268 ~%tutu_var%default~ #8
 
 COPY ~Gavin/Quest/QuestCRE/B!THUG3.CRE~ ~override~
   ADD_CRE_ITEM ~%tutu_var%leat04~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
@@ -1013,8 +1013,8 @@ COPY ~Gavin/Quest/QuestCRE/B!THUG3.CRE~ ~override~
   SAY SELECT_COMMON1 @93
   SAY SELECT_COMMON2 @94
   SAY DIALOGUE_DEFAULT @93
-  WRITE_ASCIIE 0x250 ~%tutu_scriptw%tasight~
-  WRITE_ASCIIE 0x268 ~%tutu_var%default~
+  WRITE_ASCIIE 0x250 ~%tutu_scriptw%tasight~ #8
+  WRITE_ASCIIE 0x268 ~%tutu_var%default~ #8
 
 COPY_EXISTING ~%tutu_var%SERVAN.CRE~ ~override/B!MESNGR.CRE~
   SAY NAME1 @96
