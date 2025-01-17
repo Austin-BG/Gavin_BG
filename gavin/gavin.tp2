@@ -226,9 +226,7 @@ END
   
 //=============================================================================================
 // Miloch's super-awesome code locking Beregost House 22, site of Gavin's quest
-ACTION_IF GAME_IS ~tutu tutu_totsc bgee eet~ BEGIN //If Tutu or BG:EE
-  OUTER_SPRINT BeregH22Reg ~Door3337~
-END 
+OUTER_SPRINT BeregH22Reg ~Door3337~
 ACTION_IF GAME_IS ~bgt~ BEGIN //Otherwise (if BGT)
   OUTER_SPRINT BeregH22Reg ~Door6737~
 END
