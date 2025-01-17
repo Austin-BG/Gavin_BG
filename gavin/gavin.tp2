@@ -32,7 +32,7 @@ ALWAYS
   /* check for a ready SoD */
 
   ACTION_IF ((FILE_EXISTS ~dlc/sod-dlc.zip~) OR (FILE_EXISTS ~sod-dlc.zip~)) THEN BEGIN
-    FAIL @4
+    FAIL @2004
   END
   
   ACTION_IF !VARIABLE_IS_SET cd_gavin_bg_always THEN BEGIN // check to make this happen only once per install 
@@ -67,23 +67,27 @@ ALWAYS
 
 /* Handling of correctly formatted tra-files!! ---------------------- */
 
-  /*
-   * Copies tra files into the autotra-folder (to leave the originals untouched)
-   */
-    COPY ~gavin/tra/english~  ~gavin/tra/autotra/%LANGUAGE%~ EVALUATE_BUFFER
-    COPY ~gavin/tra/%LANGUAGE%~  ~gavin/tra/autotra/%LANGUAGE%~ EVALUATE_BUFFER
+    ACTION_IF GAME_IS ~bgee eet~ THEN BEGIN
+    
+      OUTER_SPRINT ~tra_location~ ~weidu_external/gavin/tra~
+    
+      ACTION_DEFINE_ARRAY fl#reload BEGIN gavin END
 
-
-    ACTION_DEFINE_ARRAY fl#reload BEGIN gavin END
-
-    LAF HANDLE_CHARSETS
-      INT_VAR
-        infer_charset = 1
-      STR_VAR
-        tra_path = EVAL ~gavin/Tra/autotra~
-        noconvert_array = fl#noconvert
-        reload_array = fl#reload
-    END
+      LAF HANDLE_CHARSETS
+        INT_VAR
+          infer_charset = 1
+        STR_VAR
+          tra_path = ~gavin/tra~
+          out_path = ~weidu_external/gavin/tra~
+          noconvert_array = fl#noconvert
+          reload_array = fl#reload
+      END
+      
+    END ELSE BEGIN
+    
+      OUTER_SPRINT ~tra_location~ ~gavin/tra~
+ 
+    END 
     
   END // always var check  
 
@@ -91,7 +95,7 @@ END //ALWAYS
 
 
 /* Language Settings */
-AUTO_TRA ~gavin/tra/autotra/%s~
+AUTO_TRA ~%tra_location%/%s~
 
 LANGUAGE ~English~ ~english~ ~gavin/tra/english/gavin.tra~
                              ~gavin/tra/english/setup.tra~
@@ -103,7 +107,7 @@ LANGUAGE ~Deutsch (Teildeutsche Version, der Rest ist auf Englisch)~ ~german~ ~g
                                                                               ~gavin/tra/english/setup.tra~
                                                                               ~gavin/tra/german/gavin.tra~
                                                                               ~gavin/tra/german/setup.tra~
- LANGUAGE ~Russian~ ~russian (by Austin & Arcanecoast Team)~ ~gavin/tra/english/gavin.tra~
+ LANGUAGE ~russian (by Austin & Arcanecoast Team)~ ~Russian~ ~gavin/tra/english/gavin.tra~
                                                              ~gavin/tra/english/setup.tra~
                                                              ~gavin/tra/russian/gavin.tra~
                                                              ~gavin/tra/russian/setup.tra~
@@ -117,11 +121,11 @@ REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgt bgee eet~) @2
 LABEL ~b!gavin_main~
 
 //BG:EE - ADD_JOURNAL
-ADD_JOURNAL TITLE (@3000) @3001 @3002 @3003 @3004 USING ~gavin/tra/autotra/%LANGUAGE%/gavin.tra~
+ADD_JOURNAL TITLE (@3000) @3001 @3002 @3003 @3004
 
-ADD_JOURNAL @3005 @3006 USING ~gavin/tra/autotra/%LANGUAGE%/gavin.tra~
+ADD_JOURNAL @3005 @3006
 
-ADD_JOURNAL @3007 @3008 @3009 @3010 @3011 USING ~gavin/tra/autotra/%LANGUAGE%/gavin.tra~
+ADD_JOURNAL @3007 @3008 @3009 @3010 @3011
 
 
 ACTION_IF FILE_EXISTS_IN_GAME ~FW0100.are~ THEN BEGIN
@@ -822,9 +826,7 @@ COMPILE EVALUATE_BUFFER ~GAVIN/BAF/B!GAVIND.baf~
   COMPILE EVALUATE_BUFFER ~GAVIN/Quest/QuestBAF/B!GUSTAV.baf~
   COMPILE EVALUATE_BUFFER ~GAVIN/Quest/QuestBAF/B!PENNY.baf~
   COMPILE EVALUATE_BUFFER ~GAVIN/Quest/QuestBAF/B!BERTRA.baf~
-    USING ~GAVIN/TRA/autotra/%LANGUAGE%/b!bertrabaf.tra~
   COMPILE EVALUATE_BUFFER ~GAVIN/Quest/QuestBAF/B!VALER.baf~
-    USING ~GAVIN/TRA/autotra/%LANGUAGE%/b!valerbaf.tra~
   COMPILE EVALUATE_BUFFER ~GAVIN/Quest/QuestBAF/B!THUG1.baf~
   COMPILE EVALUATE_BUFFER ~GAVIN/Quest/QuestBAF/B!THUG2.baf~
   COMPILE EVALUATE_BUFFER ~GAVIN/Quest/QuestBAF/B!THUG3.baf~
@@ -1156,8 +1158,8 @@ LABEL ~b!gavin_flirts~
       EVALUATE_BUFFER
     COMPILE EVALUATE_BUFFER ~GAVIN/Flirt/gavinflirts.d~
 
-BEGIN @127 DESIGNATED 2
-DEPRECATED ~now in main~
+BEGIN @127 DESIGNATED 3 DEPRECATED ~~
+// was the BG walking speed component, but Gavin should never be installed after Tweaks, so. 
 
 BEGIN @136 DESIGNATED 4
   SUBCOMPONENT @130

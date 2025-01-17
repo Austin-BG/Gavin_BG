@@ -1,0 +1,23 @@
+The following files are in English and need translation into German:
+
+b!_bd0120.tra
+b!gavinj.tra
+b!gavinj_tosc.tra
+b!gavinlovetalks.tra
+b!gavinp.tra
+b!gavinpid.tra
+b!gavlok.tra
+b!gustav.tra
+b!initiatefiles.tra
+b!jolun.tra
+b!penny.tra
+b!quest.tra
+b!reed.tra
+b!rumor.tra
+b!valer.tra
+b!x#kaband.tra
+bb!gavin.tra
+gavin.tra
+gavinflirts.tra
+gavinnpcrombanters.tra
+pidnight.tra

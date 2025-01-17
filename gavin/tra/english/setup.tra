@@ -2,13 +2,14 @@
 @1    = ~BGT install detected.~
 @2    = ~Please install on Tutu, BGT, or BG:EE.~
 @3    = ~Gavin NPC for Tutu, BGT, and BG:EE~
-@4    = ~DLC Merger is required before mods can be installed on this game. Check the readme for more information and a link to download DLC Merger.~
+
 
 
 
 @99   = ~Gavin: Romance (mature content)~
 @100  = ~Gavin: Romance~
 @101  = ~You need to have the Gavin NPC Mod installed to select this option.~
+/* 102, 103, and 105 no longer needed sue to new subcomponent setup
 @102  = ~Select Gavin's Relationship Speed:~
 @103  = ~Please choose one of the following:
 [1] 1 hour real time (standard) minimum between LoveTalks
@@ -16,8 +17,9 @@
 [3] 30 minutes real time minimum between LoveTalks
 [4] 15 minutes real time minimum between LoveTalks
 [5] 1 hour 30 minutes (extended) real time minimum between LoveTalks~
+*/
 @104  = ~EET install detected.~
-@105  = ~Please select 1, 2, 3, 4, or 5 and press enter.~
+//@105  = ~Please select 1, 2, 3, 4, or 5 and press enter.~
 @106  = ~Speed: 1 hour real time (standard) minimum between LoveTalks~
 @107  = ~Speed: 45 minutes real time minimum between LoveTalks~
 @108  = ~Speed: 30 minutes real time minimum between LoveTalks~
@@ -25,8 +27,10 @@
 @110  = ~Speed: 1 hour 30 minutes (extended) real time minimum between LoveTalks~
 @125  = ~Gavin: Flirts (adult content)~
 @126  = ~You need to have the Gavin Romance installed to select this option.~
+// 127, 128 for deprecated compoent, no need to translate
 @127  = ~Gavin: Check for Tutu-Fix Walking Speeds~
 @128  = ~This component is only useful for Tutu installs.~
+
 @129  = ~Original portrait by berelinde (default)~
 @130  = ~Gavin: Alternate Portraits (Default portrait is already installed)~
 @131  = ~You must have installed Gavin to install the alternate portrait.~
@@ -43,6 +47,6 @@
 //@2001   = ~Blue cloak, by kiwidoc~
 //@2002   = ~Looking up, by kiwidoc~
 @2003   = ~Dragon Age style portrait by berelinde~
-
+@2004 = ~DLC Merger is required before mods can be installed on this game. Check the readme for more information and a link to download DLC Merger.~
 
 
