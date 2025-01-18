@@ -316,12 +316,12 @@ IF ~Global("B!GavinKarlat","GLOBAL",2)~ THEN ~B!GAVINJ~ BGavKarlat2
 DO ~SetGlobal("B!GavinKarlat","GLOBAL",3)~
 END
 ++ @46 EXTERN ~B!GAVINJ~ BGavKarlat.1
-+ ~HPPercentLT(Player1,80)~ + @47 DO ~SetGlobal("B!HealPlayer1","GLOBAL",1)~ EXTERN ~B!GAVINJ~ BGavKarlat.2
-+ ~HPPercentLT(Player2,80)~ + @48 DO ~SetGlobal("B!HealPlayer2","GLOBAL",1)~ EXTERN ~B!GAVINJ~ BGavKarlat.2
-+ ~HPPercentLT(Player3,80)~ + @49 DO ~SetGlobal("B!HealPlayer3","GLOBAL",1)~ EXTERN ~B!GAVINJ~ BGavKarlat.2
-+ ~HPPercentLT(Player4,80)~ + @50 DO ~SetGlobal("B!HealPlayer4","GLOBAL",1)~ EXTERN ~B!GAVINJ~ BGavKarlat.2
-+ ~HPPercentLT(Player5,80)~ + @51 DO ~SetGlobal("B!HealPlayer5","GLOBAL",1)~ EXTERN ~B!GAVINJ~ BGavKarlat.2
-+ ~HPPercentLT(Player6,80)~ + @52 DO ~SetGlobal("B!HealPlayer6","GLOBAL",1)~ EXTERN ~B!GAVINJ~ BGavKarlat.2
++ ~HPPercentLT(Player1,80) !StateCheck(Player1,STATE_REALLY_DEAD)~ + @47 DO ~SetGlobal("B!HealPlayer1","GLOBAL",1)~ EXTERN ~B!GAVINJ~ BGavKarlat.2
++ ~HPPercentLT(Player2,80) !StateCheck(Player2,STATE_REALLY_DEAD)~ + @48 DO ~SetGlobal("B!HealPlayer2","GLOBAL",1)~ EXTERN ~B!GAVINJ~ BGavKarlat.2
++ ~HPPercentLT(Player3,80) !StateCheck(Player3,STATE_REALLY_DEAD)~ + @49 DO ~SetGlobal("B!HealPlayer3","GLOBAL",1)~ EXTERN ~B!GAVINJ~ BGavKarlat.2
++ ~HPPercentLT(Player4,80) !StateCheck(Player4,STATE_REALLY_DEAD)~ + @50 DO ~SetGlobal("B!HealPlayer4","GLOBAL",1)~ EXTERN ~B!GAVINJ~ BGavKarlat.2
++ ~HPPercentLT(Player5,80) !StateCheck(Player5,STATE_REALLY_DEAD)~ + @51 DO ~SetGlobal("B!HealPlayer5","GLOBAL",1)~ EXTERN ~B!GAVINJ~ BGavKarlat.2
++ ~HPPercentLT(Player6,80) !StateCheck(Player6,STATE_REALLY_DEAD)~ + @52 DO ~SetGlobal("B!HealPlayer6","GLOBAL",1)~ EXTERN ~B!GAVINJ~ BGavKarlat.2
 
 APPEND ~B!GAVINJ~
 

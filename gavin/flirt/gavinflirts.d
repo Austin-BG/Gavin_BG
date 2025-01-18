@@ -1386,7 +1386,7 @@ END
 IF ~~ THEN BEGIN BGavinBath3Aa
 SAY @406
 + ~OR(3) Race(Player1,HALFLING) Race(Player1,GNOME) Race(Player1,DWARF)~ + @407 + BGavinBath3Aa.1
-+ ~OR(4) Race(Player1,HALFORC) Race(Player1,HUMAN) Race(Player1,ELF) Race(Player1,HALF_ELF)~ + @407 + BGavinBath3Aa.2
++ ~!Race(Player1,HALFLING) !Race(Player1,GNOME) !Race(Player1,DWARF)~ + @407 + BGavinBath3Aa.2
 ++ @408 + BGavinBath3Aa.3
 END
 
