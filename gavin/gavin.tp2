@@ -22,7 +22,7 @@ SUPPORT ~https://www.gibberlings3.net/forums/forum/128-gavin/~ //berelinde@gmail
 /* enable all error messages; nothing suppressed. comment this out for release version */
 //MODDER
 
-VERSION ~15~
+VERSION ~v15~
 
 /* launch the readme file immediately. */
 README ~gavin/readme-gavin-%LANGUAGE%.html~ ~gavin/readme-gavin.html~

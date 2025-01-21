@@ -10,7 +10,9 @@
 
 ## Overview
 
-This mod adds Gavin, an NPC cleric of Lathander, to the Baldur's Gate conversions Baldur's Gate Tutu, Baldur's Gate Trilogy, and Baldur's Gate Enhanced Edition.
+This mod adds Gavin, a neutral good Dawnbringer of Lathander, to Baldur's Gate Enhanced Edition or the Baldur's Gate conversion projects Tutu, Baldur's Gate Trilogy, and Enhanced Edition Trilogy. 
+
+Gavin was born in Ulgoth's Beard, one of the younger children of a sailmaker and a midwife. He had an unremarkable childhood, until, at the age of 12, he discovered he had a talent for healing. His father was a follower of Tyr, but his mother worshipped Lathander. They were quite surprised to find that their rambunctious son had a calling to the priesthood, but they enthusiastically supported his decision, nevertheless, accompanying him to Beregost to begin his novitiate. His service to his god and his temple was devout, but otherwise unimpressive, and he was ordained a Dawnbringer at the age of 19. Since then, he has spent most of his time performing varied services for the temple, but Gavin's advancement within the ranks has been slow. Gavin is 28 when you meet. 
 
 ## More Information
 
